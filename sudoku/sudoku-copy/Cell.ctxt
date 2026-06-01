@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Cell
+comment1.params=value\ fixed
+comment1.target=Cell(int,\ boolean)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=v
+comment3.target=void\ setValue(int)
+comment4.params=
+comment4.target=void\ draw()
+numComments=5
