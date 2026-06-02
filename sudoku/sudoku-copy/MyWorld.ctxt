@@ -8,4 +8,6 @@ comment3.params=
 comment3.target=void\ createNumberPad()
 comment4.params=
 comment4.target=void\ act()
-numComments=5
+comment5.params=cell\ number
+comment5.target=boolean\ isValidMove(Cell,\ int)
+numComments=6
