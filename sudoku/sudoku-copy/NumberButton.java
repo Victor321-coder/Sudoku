@@ -8,10 +8,10 @@ public class NumberButton extends Actor
     {
         number = n;
 
-        GreenfootImage img = new GreenfootImage(80,80);
+        GreenfootImage img = new GreenfootImage(80, 80);
 
-        img.setColor(new Color(235,240,250));
-        img.fillRect(0,0,80,80);
+        img.setColor(new Color(235, 240, 250));
+        img.fillRect(0, 0, 80, 80);
 
         img.setColor(Color.BLUE);
         img.setFont(new Font("Arial", false, false, 40));
@@ -25,9 +25,22 @@ public class NumberButton extends Actor
     {
         if(Greenfoot.mouseClicked(this))
         {
-            if(MyWorld.selectedCell != null)
+            Cell cell = MyWorld.selectedCell;
+
+            if(cell != null)
             {
-                MyWorld.selectedCell.setValue(number);
+                if(MyWorld.isValidMove(cell, number))
+                {
+                    cell.setValue(number);
+                }
+                else
+                {
+                    System.out.println(
+                        "Invalid move! " +
+                        number +
+                        " already exists in that row, column, or box."
+                    );
+                }
             }
         }
     }
