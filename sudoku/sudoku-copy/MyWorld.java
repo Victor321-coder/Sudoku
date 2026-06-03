@@ -16,7 +16,7 @@ public class MyWorld extends World
         createBoard();
         createNumberPad();
         
-        
+        addObject(new Restart(), 675, 150); 
     }
 
     private void createBoard()
@@ -130,5 +130,9 @@ public class MyWorld extends World
         }
 
         return true;
+    } 
+    
+    public void restart () {
+        createBoard();
     }
 }
