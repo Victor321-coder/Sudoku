@@ -6,22 +6,13 @@ public class MyWorld extends World
 
     public static Cell[][] board = new Cell[9][9];
 
-    private int[][] puzzle = {
-        {3,0,0,0,4,9,0,0,0},
-        {0,0,0,6,0,0,5,0,1},
-        {7,5,2,0,0,1,0,0,0},
-        {0,0,1,0,0,0,7,0,0},
-        {5,0,0,3,9,6,0,0,0},
-        {0,0,8,1,5,0,0,9,6},
-        {0,0,3,0,1,0,0,6,0},
-        {0,0,4,0,0,0,1,0,0},
-        {0,0,0,0,2,8,0,0,0}
-    };
+    private int[][] puzzle;
 
     public MyWorld()
     {
         super(1000, 700, 1);
-
+        
+        puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
         createNumberPad();
         

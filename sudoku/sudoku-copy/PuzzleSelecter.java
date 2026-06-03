@@ -778,7 +778,7 @@ public class PuzzleSelecter extends Actor
     };
     
     //difficulty: easy=1, medium=2, hard=3
-    public int[][] getBoard(int difficulty){
+    public static int[][] getBoard(int difficulty){
         int boardNum = Greenfoot.getRandomNumber(10);
         int board[][];
         if(difficulty==1){
@@ -792,7 +792,7 @@ public class PuzzleSelecter extends Actor
         return copyBoard(EASY_BOARDS[0]);
     };
     
-    private int[][] copyBoard(int[][] original){
+    private static int[][] copyBoard(int[][] original){
         int[][] copy=new int[original.length][original[0].length];
         for (int row = 0; row < original.length; row++) {
             for (int col = 0; col < original[row].length; col++) {
