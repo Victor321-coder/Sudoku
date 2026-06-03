@@ -16,7 +16,8 @@ public class MyWorld extends World
         createBoard();
         createNumberPad();
         
-        addObject(new Restart(), 675, 150); 
+        addObject(new RestartButton(), 675, 150); 
+        addObject(new HintButton(), 925, 150); 
     }
 
     private void createBoard()
