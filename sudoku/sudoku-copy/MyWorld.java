@@ -10,7 +10,7 @@ public class MyWorld extends World
 
     public MyWorld()
     {
-        super(1000, 700, 1);
+        super(1069, 689, 1);
         
         puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
