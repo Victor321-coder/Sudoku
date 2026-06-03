@@ -1,3 +1,5 @@
+import javax.swing.border.Border;
+
 import greenfoot.*;
 
 public class MyWorld extends World
@@ -9,12 +11,16 @@ public class MyWorld extends World
     private int[][] puzzle;
     private int startX, startY, size;
 
+    private static boolean pencilMode = false;
+    
     public MyWorld()
     {
+
         
         super(1000, 700, 1);
         startX=80;
         startY=160;
+
         
         puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
@@ -24,7 +30,11 @@ public class MyWorld extends World
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
         int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
         addObject(border, borderX, borderY);
+        addObject(new Restart(), 675, 150); 
+        addObject(new EraserButton(), 846, 158);
+        addObject(new PencilButton(), 948, 158);
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
+        
         
     }
 
@@ -124,5 +134,17 @@ public class MyWorld extends World
         }
 
         return true;
+    } 
+    
+    public void restart () {
+        createBoard();
+    }
+    
+    public boolean getPencilMode(){
+        return pencilMode;
+    }
+    
+    public static void setPencilMode(boolean state){
+        pencilMode = state;
     }
 }
