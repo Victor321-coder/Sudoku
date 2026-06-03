@@ -8,6 +8,8 @@ public class MyWorld extends World
 
     private int[][] puzzle;
 
+    private static boolean pencilMode = false;
+    
     public MyWorld()
     {
         super(1000, 700, 1);
@@ -17,6 +19,8 @@ public class MyWorld extends World
         createNumberPad();
         
         addObject(new Restart(), 675, 150); 
+        addObject(new EraserButton(), 846, 158);
+        addObject(new PencilButton(), 948, 158);
     }
 
     private void createBoard()
@@ -134,5 +138,13 @@ public class MyWorld extends World
     
     public void restart () {
         createBoard();
+    }
+    
+    public boolean getPencilMode(){
+        return pencilMode;
+    }
+    
+    public static void setPencilMode(boolean state){
+        pencilMode = state;
     }
 }
