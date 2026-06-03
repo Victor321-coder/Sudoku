@@ -7,24 +7,31 @@ public class MyWorld extends World
     public static Cell[][] board = new Cell[9][9];
 
     private int[][] puzzle;
+    private int startX, startY, size;
 
     public MyWorld()
     {
+        
         super(1000, 700, 1);
+        startX=80;
+        startY=160;
         
         puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
         createNumberPad();
         
+        Border border=new Border(size);
+        int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
+        int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
+        addObject(border, borderX, borderY);
+        setPaintOrder(Border.class, Cell.class, NumberButton.class);
         
     }
 
     private void createBoard()
     {
-        int startX = 80;
-        int startY = 80;
-        int size = 60;
-
+        size = 60;
+    
         for(int r = 0; r < 9; r++)
         {
             for(int c = 0; c < 9; c++)
@@ -45,6 +52,8 @@ public class MyWorld extends World
                 );
             }
         }
+        
+        
     }
 
     private void createNumberPad()
@@ -65,29 +74,14 @@ public class MyWorld extends World
             }
         }
     }
-
+    public void makeMove(){
+        
+    }
     public void act()
     {
-        GreenfootImage bg = getBackground();
-
-        bg.setColor(Color.WHITE);
-        bg.fill();
-
-        bg.setColor(Color.BLACK);
-
-        int startX = 50;
-        int startY = 50;
-
-        for(int i = 0; i <= 9; i++)
-        {
-            if(i % 3 == 0)
-            {
-                bg.fillRect(startX + i * 60, startY, 3, 540);
-                bg.fillRect(startX, startY + i * 60, 540, 3);
-            }
-        }
+        
     }
-
+    
     public static boolean isValidMove(Cell cell, int number)
     {
         int row = cell.getRow();
