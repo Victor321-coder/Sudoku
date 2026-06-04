@@ -29,11 +29,10 @@ public class MyWorld extends World
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
         int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
         addObject(border, borderX, borderY);
-        addObject(new Restart(), 675, 150); 
-        addObject(new EraserButton(), 846, 158);
+        addObject(new EraserButton(), 860, 158);
         addObject(new PencilButton(), 948, 158);
-        addObject(new RestartButton(), 675, 150); 
-        addObject(new HintButton(), 925, 150); 
+        addObject(new RestartButton(), 675, 158); 
+        addObject(new HintButton(), 770, 158); 
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
         
     }

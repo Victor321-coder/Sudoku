@@ -6,10 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class HintButton extends Actor
+public class HintButton extends UI
 {
     public HintButton() {
-        GreenfootImage img = new GreenfootImage("hint button.png"); 
+        GreenfootImage img = new GreenfootImage("HintUI.png"); 
         setImage(img); 
     }
     /**

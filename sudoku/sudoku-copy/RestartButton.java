@@ -6,10 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class RestartButton extends Actor
+public class RestartButton extends UI
 {
     public RestartButton () {
-        GreenfootImage img = new GreenfootImage("restart button.png"); 
+        GreenfootImage img = new GreenfootImage("RestartUI.png"); 
         setImage(img); 
     }
     /**
