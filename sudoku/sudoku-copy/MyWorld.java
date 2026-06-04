@@ -1,5 +1,3 @@
-import javax.swing.border.Border;
-
 import greenfoot.*;
 
 public class MyWorld extends World
