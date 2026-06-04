@@ -1,3 +1,5 @@
+import javax.swing.border.Border;
+
 import greenfoot.*;
 
 public class MyWorld extends World
@@ -7,25 +9,41 @@ public class MyWorld extends World
     public static Cell[][] board = new Cell[9][9];
 
     private int[][] puzzle;
+    private int startX, startY, size;
 
+    private static boolean pencilMode = false;
+    
     public MyWorld()
     {
-        super(1069, 689, 1);
+
+        
+        super(1000, 700, 1);
+        startX=80;
+        startY=160;
+
         
         puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
         createNumberPad();
         
+        
+        Border border=new Border(size);
+        int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
+        int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
+        addObject(border, borderX, borderY);
+        addObject(new Restart(), 675, 150); 
+        addObject(new EraserButton(), 846, 158);
+        addObject(new PencilButton(), 948, 158);
         addObject(new RestartButton(), 675, 150); 
         addObject(new HintButton(), 925, 150); 
+        setPaintOrder(Border.class, Cell.class, NumberButton.class);
+        
     }
 
     private void createBoard()
     {
-        int startX = 80;
-        int startY = 80;
-        int size = 60;
-
+        size = 60;
+    
         for(int r = 0; r < 9; r++)
         {
             for(int c = 0; c < 9; c++)
@@ -46,6 +64,8 @@ public class MyWorld extends World
                 );
             }
         }
+        
+        
     }
 
     private void createNumberPad()
@@ -66,29 +86,14 @@ public class MyWorld extends World
             }
         }
     }
-
+    public void makeMove(){
+        
+    }
     public void act()
     {
-        GreenfootImage bg = getBackground();
-
-        bg.setColor(Color.WHITE);
-        bg.fill();
-
-        bg.setColor(Color.BLACK);
-
-        int startX = 50;
-        int startY = 50;
-
-        for(int i = 0; i <= 9; i++)
-        {
-            if(i % 3 == 0)
-            {
-                bg.fillRect(startX + i * 60, startY, 3, 540);
-                bg.fillRect(startX, startY + i * 60, 540, 3);
-            }
-        }
+        
     }
-
+    
     public static boolean isValidMove(Cell cell, int number)
     {
         int row = cell.getRow();
@@ -135,5 +140,13 @@ public class MyWorld extends World
     
     public void restart () {
         createBoard();
+    }
+    
+    public boolean getPencilMode(){
+        return pencilMode;
+    }
+    
+    public static void setPencilMode(boolean state){
+        pencilMode = state;
     }
 }

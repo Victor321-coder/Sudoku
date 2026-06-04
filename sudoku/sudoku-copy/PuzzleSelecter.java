@@ -1,15 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class PuzzleSelecter here.
+ * PuzzleSelecter is a class that stores a bunch of pre-made puzzle boards.
+ * Along with their corrected answers.
+ * This class allows other class to retrieve random board based on specified difficulty levels
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * 
+ * @author Kevin Shen
+ * @version Jun 2 2026
  */
 public class PuzzleSelecter extends Actor
 {
     /**
-     * Act - do whatever the PuzzleSelecter wants to do. This method is called whenever
+     * Act - do whatever the PuzzlzSelecter wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private static int[][] puzzleEasy1 = {
