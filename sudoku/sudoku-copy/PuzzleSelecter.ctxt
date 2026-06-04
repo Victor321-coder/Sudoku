@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=PuzzleSelecter
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ PuzzleSelecter\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ PuzzleSelecter\ is\ a\ class\ that\ stores\ a\ bunch\ of\ pre-made\ puzzle\ boards.\r\n\ Along\ with\ their\ corrected\ answers.\r\n\ This\ class\ allows\ other\ class\ to\ retrieve\ random\ board\ based\ on\ specified\ difficulty\ levels\r\n\ \r\n\ \r\n\ @author\ Kevin\ Shen\r\n\ @version\ Jun\ 2\ 2026\r\n
 comment1.params=difficulty
 comment1.target=int[][]\ getBoard(int)
 comment2.params=original
