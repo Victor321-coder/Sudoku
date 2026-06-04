@@ -13,17 +13,13 @@ public class MyWorld extends World
     
     public MyWorld()
     {
-
-        
         super(1000, 700, 1);
         startX=80;
         startY=160;
-
         
         puzzle=PuzzleSelecter.getBoard(1);
         createBoard();
         createNumberPad();
-        
         
         Border border=new Border(size);
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
@@ -99,8 +95,7 @@ public class MyWorld extends World
         // Row check
         for(int c = 0; c < 9; c++)
         {
-            if(board[row][c] != cell &&
-               board[row][c].getValue() == number)
+            if(board[row][c] != cell && board[row][c].getValue() == number)
             {
                 return false;
             }
@@ -109,8 +104,7 @@ public class MyWorld extends World
         // Column check
         for(int r = 0; r < 9; r++)
         {
-            if(board[r][col] != cell &&
-               board[r][col].getValue() == number)
+            if(board[r][col] != cell && board[r][col].getValue() == number)
             {
                 return false;
             }
@@ -124,8 +118,7 @@ public class MyWorld extends World
         {
             for(int c = startCol; c < startCol + 3; c++)
             {
-                if(board[r][c] != cell &&
-                   board[r][c].getValue() == number)
+                if(board[r][c] != cell && board[r][c].getValue() == number)
                 {
                     return false;
                 }
@@ -145,5 +138,9 @@ public class MyWorld extends World
     
     public static void setPencilMode(boolean state){
         pencilMode = state;
+    }
+    
+    public void giveHint() {
+        
     }
 }
