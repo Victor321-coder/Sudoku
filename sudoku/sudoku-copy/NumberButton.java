@@ -25,25 +25,36 @@ public class NumberButton extends Actor
     {
         userNumberSelect();
     }
-    public void userNumberSelect(){
+    public void userNumberSelect()
+    {
         if(Greenfoot.mouseClicked(this))
         {
             Cell cell = MyWorld.selectedCell;
 
-            if(cell != null)
+            if(cell == null)
             {
-                if(MyWorld.isValidMove(cell, number))
-                {
-                    cell.setValue(number);
-                }
-                else
-                {
-                    System.out.println(
-                        "Invalid move! " +
-                        number +
-                        " already exists in that row, column, or box."
-                    );
-                }
+                return;
+            }
+
+            // Pencil mode ON
+            if(MyWorld.isPencilMode())
+            {
+                cell.togglePencilMark(number);
+                return;
+            }
+
+            // Normal mode
+            if(MyWorld.isValidMove(cell, number))
+            {
+                cell.setValue(number);
+            }
+            else
+            {
+                System.out.println(
+                    "Invalid move! " +
+                    number +
+                    " already exists in that row, column, or box."
+                );
             }
         }
     }

@@ -38,7 +38,6 @@ public class MyWorld extends World
 
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
 
-        // Start timer
         startTime = System.currentTimeMillis();
         timerRunning = true;
     }
@@ -103,6 +102,7 @@ public class MyWorld extends World
         }
 
         MouseInfo mouse = Greenfoot.getMouseInfo();
+
         if(mouse == null)
         {
             return;
@@ -110,6 +110,7 @@ public class MyWorld extends World
 
         int boardX = startX - size / 2;
         int boardY = startY - size / 2;
+
         int mouseX = mouse.getX();
         int mouseY = mouse.getY();
 
@@ -200,7 +201,7 @@ public class MyWorld extends World
             }
         }
 
-        // 3x3 box check
+        // Box check
         int startRow = (row / 3) * 3;
         int startCol = (col / 3) * 3;
 
@@ -230,15 +231,24 @@ public class MyWorld extends World
         createBoard();
     }
 
-    public boolean getPencilMode()
-    {
-        return pencilMode;
-    }
+    
 
     public static void setPencilMode(boolean state)
     {
         pencilMode = state;
     }
+
+    public static boolean getPencilMode()
+    {
+        return pencilMode;
+    }
+
+    public static boolean isPencilMode()
+    {
+        return pencilMode;
+    }
+
+    
 
     public Cell getSelectedCell()
     {

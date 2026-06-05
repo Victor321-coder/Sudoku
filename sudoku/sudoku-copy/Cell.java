@@ -7,7 +7,11 @@ public class Cell extends Actor
     private boolean selected = false;
 
     private int row;
-    private int col, size;
+    private int col;
+    private int size;
+
+    // Pencil marks (1-9)
+    private boolean[] pencilMarks = new boolean[10];
 
     public Cell(int value, boolean fixed, int row, int col, int size)
     {
@@ -15,17 +19,13 @@ public class Cell extends Actor
         this.fixed = fixed;
         this.row = row;
         this.col = col;
-        this.size=size;
+        this.size = size;
 
         draw();
     }
 
     public void act()
     {
-        // if(Greenfoot.mouseClicked(this))
-        // {
-            // MyWorld.selectCell(this);
-        // }
     }
 
     public void setSelected(boolean selected)
@@ -39,6 +39,45 @@ public class Cell extends Actor
         if(!fixed)
         {
             value = v;
+
+            // Remove all pencil marks when a real number is placed
+            clearPencilMarks();
+
+            draw();
+        }
+    }
+
+    public void togglePencilMark(int num)
+    {
+        if(fixed)
+        {
+            return;
+        }
+
+        if(value != 0)
+        {
+            return;
+        }
+
+        pencilMarks[num] = !pencilMarks[num];
+
+        draw();
+    }
+
+    public void clearPencilMarks()
+    {
+        for(int i = 1; i <= 9; i++)
+        {
+            pencilMarks[i] = false;
+        }
+    }
+
+    public void clearCell()
+    {
+        if(!fixed)
+        {
+            value = 0;
+            clearPencilMarks();
             draw();
         }
     }
@@ -62,10 +101,12 @@ public class Cell extends Actor
     {
         GreenfootImage img = new GreenfootImage(size, size);
 
-        if(selected){
+        if(selected)
+        {
             img.setColor(new Color(200, 220, 255));
         }
-        else{
+        else
+        {
             img.setColor(Color.WHITE);
         }
 
@@ -76,14 +117,37 @@ public class Cell extends Actor
 
         if(value != 0)
         {
-            if(fixed){
+            if(fixed)
+            {
                 img.setColor(new Color(0, 70, 180));
-            }else{
+            }
+            else
+            {
                 img.setColor(Color.BLACK);
             }
 
             img.setFont(new Font("Arial", false, false, 28));
             img.drawString("" + value, 24, 38);
+        }
+        else
+        {
+            // Draw pencil marks
+            img.setColor(Color.GRAY);
+            img.setFont(new Font("Arial", false, false, 12));
+
+            for(int n = 1; n <= 9; n++)
+            {
+                if(pencilMarks[n])
+                {
+                    int miniRow = (n - 1) / 3;
+                    int miniCol = (n - 1) % 3;
+
+                    int x = 6 + miniCol * 18;
+                    int y = 14 + miniRow * 18;
+
+                    img.drawString("" + n, x, y);
+                }
+            }
         }
 
         setImage(img);
