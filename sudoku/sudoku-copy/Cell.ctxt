@@ -1,5 +1,33 @@
 #BlueJ class context
 comment0.target=Cell
+<<<<<<< HEAD
+comment1.params=value\ fixed\ row\ col
+comment1.target=Cell(int,\ boolean,\ int,\ int)
+=======
+<<<<<<< Updated upstream
+comment1.params=value\ fixed\ row\ col\ size
+comment1.target=Cell(int,\ boolean,\ int,\ int,\ int)
+>>>>>>> 0dafa8662c32e0194acb223ff099985d7e8c3bd2
+comment2.params=
+comment2.target=void\ act()
+comment3.params=v
+comment3.target=void\ setValue(int)
+comment4.params=
+comment4.target=int\ getValue()
+comment5.params=
+comment5.target=int\ getRow()
+comment6.params=
+comment6.target=int\ getCol()
+comment7.params=
+<<<<<<< HEAD
+comment7.target=void\ draw()
+numComments=8
+=======
+comment7.target=int\ getCol()
+comment8.params=
+comment8.target=void\ draw()
+numComments=9
+=======
 comment1.params=value\ fixed\ row\ col
 comment1.target=Cell(int,\ boolean,\ int,\ int)
 comment2.params=
@@ -15,3 +43,5 @@ comment6.target=int\ getCol()
 comment7.params=
 comment7.target=void\ draw()
 numComments=8
+>>>>>>> Stashed changes
+>>>>>>> 0dafa8662c32e0194acb223ff099985d7e8c3bd2
