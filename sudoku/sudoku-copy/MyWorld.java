@@ -3,43 +3,50 @@ import greenfoot.*;
 public class MyWorld extends World
 {
     public static Cell selectedCell;
-
     public static Cell[][] board = new Cell[9][9];
 
     private int[][] puzzle;
     private int startX, startY, size;
 
     private static boolean pencilMode = false;
-    
+
+    // Timer variables
+    private long startTime;
+    private boolean timerRunning;
+
     public MyWorld()
     {
-
-        
         super(1000, 700, 1);
-        startX=80;
-        startY=160;
 
-        
-        puzzle=PuzzleSelecter.getBoard(1);
+        startX = 80;
+        startY = 160;
+
+        puzzle = PuzzleSelecter.getBoard(1);
+
         createBoard();
         createNumberPad();
-        
-        Border border=new Border(size);
+
+        Border border = new Border(size);
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
         int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
+
         addObject(border, borderX, borderY);
-        addObject(new Restart(), 675, 150); 
+
+        addObject(new Restart(), 675, 150);
         addObject(new EraserButton(), 846, 158);
         addObject(new PencilButton(), 948, 158);
+
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
-        
-        
+
+        // Start timer
+        startTime = System.currentTimeMillis();
+        timerRunning = true;
     }
 
     private void createBoard()
     {
         size = 60;
-    
+
         for(int r = 0; r < 9; r++)
         {
             for(int c = 0; c < 9; c++)
@@ -60,8 +67,6 @@ public class MyWorld extends World
                 );
             }
         }
-        
-        
     }
 
     private void createNumberPad()
@@ -82,14 +87,47 @@ public class MyWorld extends World
             }
         }
     }
-    public void makeMove(){
-        
-    }
+
     public void act()
     {
-        
+        updateTimer();
     }
-    
+
+    private void updateTimer()
+    {
+        if(!timerRunning)
+        {
+            return;
+        }
+
+        long elapsedSeconds =
+            (System.currentTimeMillis() - startTime) / 1000;
+
+        int minutes = (int)(elapsedSeconds / 60);
+        int seconds = (int)(elapsedSeconds % 60);
+
+        String time =
+            String.format("%02d:%02d", minutes, seconds);
+
+        showText("Time: " + time, 850, 80);
+    }
+
+    public void stopTimer()
+    {
+        timerRunning = false;
+    }
+
+    public void resetTimer()
+    {
+        startTime = System.currentTimeMillis();
+        timerRunning = true;
+    }
+
+    public void makeMove()
+    {
+
+    }
+
     public static boolean isValidMove(Cell cell, int number)
     {
         int row = cell.getRow();
@@ -132,17 +170,33 @@ public class MyWorld extends World
         }
 
         return true;
-    } 
-    
-    public void restart () {
+    }
+
+    public void restart()
+    {
+        resetTimer();
+
+        for(int r = 0; r < 9; r++)
+        {
+            for(int c = 0; c < 9; c++)
+            {
+                if(board[r][c] != null)
+                {
+                    removeObject(board[r][c]);
+                }
+            }
+        }
+
         createBoard();
     }
-    
-    public boolean getPencilMode(){
+
+    public boolean getPencilMode()
+    {
         return pencilMode;
     }
-    
-    public static void setPencilMode(boolean state){
+
+    public static void setPencilMode(boolean state)
+    {
         pencilMode = state;
     }
 }
