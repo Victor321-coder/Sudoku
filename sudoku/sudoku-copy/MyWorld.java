@@ -4,7 +4,8 @@ public class MyWorld extends World
 {
     public static Cell selectedCell;
 
-    public static Cell[][] board = new Cell[9][9];
+    private static Cell[][] board = new Cell[9][9];
+    private static Cell[][] boardOverlay = new Cell[9][9];
 
     private int[][] puzzle;
     private int startX, startY, size;
@@ -31,11 +32,21 @@ public class MyWorld extends World
         addObject(new Restart(), 675, 150); 
         addObject(new EraserButton(), 846, 158);
         addObject(new PencilButton(), 948, 158);
+        
+        
+        
+        
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
         
         
+        
+        
     }
-
+    public void act()
+    {
+        checkUserInput();
+    }
+    
     private void createBoard()
     {
         size = 60;
@@ -48,10 +59,12 @@ public class MyWorld extends World
                     puzzle[r][c],
                     puzzle[r][c] != 0,
                     r,
-                    c
+                    c,
+                    size
                 );
 
                 board[r][c] = cell;
+                
 
                 addObject(
                     cell,
@@ -60,9 +73,8 @@ public class MyWorld extends World
                 );
             }
         }
-        
-        
     }
+    
 
     private void createNumberPad()
     {
@@ -82,13 +94,51 @@ public class MyWorld extends World
             }
         }
     }
-    public void makeMove(){
-        
+    public void checkUserInput(){
+        if(!Greenfoot.mouseClicked(null))
+        {
+            return;
+        }
+
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if(mouse == null)
+        {
+            return;
+        }
+
+        int boardX = startX - size / 2;
+        int boardY = startY - size / 2;
+        int mouseX = mouse.getX();
+        int mouseY = mouse.getY();
+
+        if(mouseX < boardX || mouseX >= boardX + size * 9 ||
+           mouseY < boardY || mouseY >= boardY + size * 9)
+        {
+            return;
+        }
+
+        int col = (mouseX - boardX) / size;
+        int row = (mouseY - boardY) / size;
+
+        selectCell(board[row][col]);
     }
-    public void act()
+
+    public static void selectCell(Cell cell)
     {
-        
+        if(selectedCell != null)
+        {
+            selectedCell.setSelected(false);
+        }
+
+        selectedCell = cell;
+
+        if(selectedCell != null)
+        {
+            selectedCell.setSelected(true);
+        }
     }
+    
+    
     
     public static boolean isValidMove(Cell cell, int number)
     {
@@ -135,6 +185,8 @@ public class MyWorld extends World
     } 
     
     public void restart () {
+        removeObjects(getObjects(Cell.class));
+        selectedCell = null;
         createBoard();
     }
     
@@ -144,5 +196,8 @@ public class MyWorld extends World
     
     public static void setPencilMode(boolean state){
         pencilMode = state;
+    }
+    public Cell getSelectedCell(){
+        return selectedCell;
     }
 }
