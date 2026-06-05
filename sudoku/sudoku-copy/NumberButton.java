@@ -23,6 +23,9 @@ public class NumberButton extends Actor
 
     public void act()
     {
+        userNumberSelect();
+    }
+    public void userNumberSelect(){
         if(Greenfoot.mouseClicked(this))
         {
             Cell cell = MyWorld.selectedCell;
