@@ -3,13 +3,7 @@ import greenfoot.*;
 public class MyWorld extends World
 {
     public static Cell selectedCell;
-<<<<<<< HEAD
     public static Cell[][] board = new Cell[9][9];
-=======
-
-    private static Cell[][] board = new Cell[9][9];
-    private static Cell[][] boardOverlay = new Cell[9][9];
->>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
 
     private int[][] puzzle;
     private int startX, startY, size;
@@ -41,30 +35,20 @@ public class MyWorld extends World
         addObject(new Restart(), 675, 150);
         addObject(new EraserButton(), 846, 158);
         addObject(new PencilButton(), 948, 158);
-<<<<<<< HEAD
 
         setPaintOrder(Border.class, Cell.class, NumberButton.class);
 
         // Start timer
         startTime = System.currentTimeMillis();
         timerRunning = true;
-=======
-        
-        
-        
-        
-        setPaintOrder(Border.class, Cell.class, NumberButton.class);
-        
-        
-        
-        
->>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
     }
+
     public void act()
     {
         checkUserInput();
+        updateTimer();
     }
-    
+
     private void createBoard()
     {
         size = 60;
@@ -82,7 +66,6 @@ public class MyWorld extends World
                 );
 
                 board[r][c] = cell;
-                
 
                 addObject(
                     cell,
@@ -92,7 +75,6 @@ public class MyWorld extends World
             }
         }
     }
-    
 
     private void createNumberPad()
     {
@@ -112,50 +94,9 @@ public class MyWorld extends World
             }
         }
     }
-<<<<<<< HEAD
 
-    public void act()
+    private void checkUserInput()
     {
-        updateTimer();
-    }
-
-    private void updateTimer()
-    {
-        if(!timerRunning)
-        {
-            return;
-        }
-
-        long elapsedSeconds =
-            (System.currentTimeMillis() - startTime) / 1000;
-
-        int minutes = (int)(elapsedSeconds / 60);
-        int seconds = (int)(elapsedSeconds % 60);
-
-        String time =
-            String.format("%02d:%02d", minutes, seconds);
-
-        showText("Time: " + time, 850, 80);
-    }
-
-    public void stopTimer()
-    {
-        timerRunning = false;
-    }
-
-    public void resetTimer()
-    {
-        startTime = System.currentTimeMillis();
-        timerRunning = true;
-    }
-
-    public void makeMove()
-    {
-
-    }
-
-=======
-    public void checkUserInput(){
         if(!Greenfoot.mouseClicked(null))
         {
             return;
@@ -198,10 +139,42 @@ public class MyWorld extends World
             selectedCell.setSelected(true);
         }
     }
-    
-    
-    
->>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
+
+    private void updateTimer()
+    {
+        if(!timerRunning)
+        {
+            return;
+        }
+
+        long elapsedSeconds =
+            (System.currentTimeMillis() - startTime) / 1000;
+
+        int minutes = (int)(elapsedSeconds / 60);
+        int seconds = (int)(elapsedSeconds % 60);
+
+        String time =
+            String.format("%02d:%02d", minutes, seconds);
+
+        showText("Time: " + time, 850, 80);
+    }
+
+    public void stopTimer()
+    {
+        timerRunning = false;
+    }
+
+    public void resetTimer()
+    {
+        startTime = System.currentTimeMillis();
+        timerRunning = true;
+    }
+
+    public void makeMove()
+    {
+        // TODO
+    }
+
     public static boolean isValidMove(Cell cell, int number)
     {
         int row = cell.getRow();
@@ -244,31 +217,16 @@ public class MyWorld extends World
         }
 
         return true;
-<<<<<<< HEAD
     }
 
     public void restart()
     {
         resetTimer();
 
-        for(int r = 0; r < 9; r++)
-        {
-            for(int c = 0; c < 9; c++)
-            {
-                if(board[r][c] != null)
-                {
-                    removeObject(board[r][c]);
-                }
-            }
-        }
-
-=======
-    } 
-    
-    public void restart () {
         removeObjects(getObjects(Cell.class));
+
         selectedCell = null;
->>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
+
         createBoard();
     }
 
@@ -281,11 +239,9 @@ public class MyWorld extends World
     {
         pencilMode = state;
     }
-<<<<<<< HEAD
-}
-=======
-    public Cell getSelectedCell(){
+
+    public Cell getSelectedCell()
+    {
         return selectedCell;
     }
 }
->>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
