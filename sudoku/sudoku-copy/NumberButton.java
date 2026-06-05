@@ -23,28 +23,12 @@ public class NumberButton extends Actor
 
     public void act()
     {
-        userNumberSelect();
+        // userNumberSelect();
     }
-    public void userNumberSelect(){
-        if(Greenfoot.mouseClicked(this))
-        {
-            Cell cell = MyWorld.selectedCell;
-
-            if(cell != null)
-            {
-                if(MyWorld.isValidMove(cell, number))
-                {
-                    cell.setValue(number);
-                }
-                else
-                {
-                    System.out.println(
-                        "Invalid move! " +
-                        number +
-                        " already exists in that row, column, or box."
-                    );
-                }
-            }
-        }
+    
+    public int getValue(){
+        return number;
     }
+    
+    
 }
