@@ -2,17 +2,25 @@
 comment0.target=MyWorld
 comment1.params=
 comment1.target=MyWorld()
+<<<<<<< HEAD
 comment10.params=
 comment10.target=void\ restart()
 comment11.params=
 comment11.target=boolean\ getPencilMode()
 comment12.params=state
 comment12.target=void\ setPencilMode(boolean)
+=======
+comment10.params=state
+comment10.target=void\ setPencilMode(boolean)
+comment11.params=
+comment11.target=Cell\ getSelectedCell()
+>>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6
 comment2.params=
-comment2.target=void\ createBoard()
+comment2.target=void\ act()
 comment3.params=
-comment3.target=void\ createNumberPad()
+comment3.target=void\ createBoard()
 comment4.params=
+<<<<<<< HEAD
 comment4.target=void\ act()
 comment5.params=
 comment5.target=void\ updateTimer()
@@ -25,3 +33,17 @@ comment8.target=void\ makeMove()
 comment9.params=cell\ number
 comment9.target=boolean\ isValidMove(Cell,\ int)
 numComments=13
+=======
+comment4.target=void\ createNumberPad()
+comment5.params=
+comment5.target=void\ checkUserInput()
+comment6.params=cell
+comment6.target=void\ selectCell(Cell)
+comment7.params=cell\ number
+comment7.target=boolean\ isValidMove(Cell,\ int)
+comment8.params=
+comment8.target=void\ restart()
+comment9.params=
+comment9.target=boolean\ getPencilMode()
+numComments=12
+>>>>>>> 61cc2c654cd47ee6639d1d540d375bb35dbe39e6

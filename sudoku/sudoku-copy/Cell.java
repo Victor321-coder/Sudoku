@@ -7,33 +7,31 @@ public class Cell extends Actor
     private boolean selected = false;
 
     private int row;
-    private int col;
+    private int col, size;
 
-    public Cell(int value, boolean fixed, int row, int col)
+    public Cell(int value, boolean fixed, int row, int col, int size)
     {
         this.value = value;
         this.fixed = fixed;
         this.row = row;
         this.col = col;
+        this.size=size;
 
         draw();
     }
 
     public void act()
     {
-        if(Greenfoot.mouseClicked(this))
-        {
-            if(MyWorld.selectedCell != null)
-            {
-                MyWorld.selectedCell.selected = false;
-                MyWorld.selectedCell.draw();
-            }
+        // if(Greenfoot.mouseClicked(this))
+        // {
+            // MyWorld.selectCell(this);
+        // }
+    }
 
-            selected = true;
-            MyWorld.selectedCell = this;
-
-            draw();
-        }
+    public void setSelected(boolean selected)
+    {
+        this.selected = selected;
+        draw();
     }
 
     public void setValue(int v)
@@ -62,24 +60,27 @@ public class Cell extends Actor
 
     private void draw()
     {
-        GreenfootImage img = new GreenfootImage(60, 60);
+        GreenfootImage img = new GreenfootImage(size, size);
 
-        if(selected)
+        if(selected){
             img.setColor(new Color(200, 220, 255));
-        else
+        }
+        else{
             img.setColor(Color.WHITE);
+        }
 
-        img.fillRect(0, 0, 60, 60);
+        img.fillRect(0, 0, size, size);
 
         img.setColor(Color.GRAY);
-        img.drawRect(0, 0, 59, 59);
+        img.drawRect(0, 0, size - 1, size - 1);
 
         if(value != 0)
         {
-            if(fixed)
+            if(fixed){
                 img.setColor(new Color(0, 70, 180));
-            else
+            }else{
                 img.setColor(Color.BLACK);
+            }
 
             img.setFont(new Font("Arial", false, false, 28));
             img.drawString("" + value, 24, 38);
