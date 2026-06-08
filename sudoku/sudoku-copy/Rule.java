@@ -4,10 +4,10 @@ public class Rule extends World
 {
     public Rule()
     {
-        super(1188, 766, 1);
+        super(1000, 700, 1);
 
-        GreenfootImage bg = new GreenfootImage("rule.png");
-        bg.scale(1188, 766);
+        GreenfootImage bg = new GreenfootImage("new_rule.png");
+        bg.scale(1000, 700);
         setBackground(bg);
 
         addObject(new BackButton(), 100, 50);
