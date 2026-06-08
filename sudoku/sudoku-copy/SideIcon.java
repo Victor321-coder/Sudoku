@@ -2,8 +2,12 @@ import greenfoot.*;
 
 public class SideIcon extends Actor
 {
+    private String type;
+
     public SideIcon(String text)
     {
+        type = text;
+
         GreenfootImage img = new GreenfootImage(70, 70);
 
         img.setColor(new Color(120, 80, 40));
@@ -15,5 +19,16 @@ public class SideIcon extends Actor
         img.drawString(text, 10, 40);
 
         setImage(img);
+    }
+
+    public void act()
+    {
+        if (Greenfoot.mouseClicked(this))
+        {
+            if (type.equals("HELP"))
+            {
+                Greenfoot.setWorld(new Rule());
+            }
+        }
     }
 }
