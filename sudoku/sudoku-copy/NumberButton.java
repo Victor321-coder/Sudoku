@@ -23,8 +23,14 @@ public class NumberButton extends Actor
 
     public void act()
     {
-        userNumberSelect();
+        // userNumberSelect();
     }
+
+    
+    public int getValue(){
+        return number;
+    }
+
     public void userNumberSelect()
     {
         if(Greenfoot.mouseClicked(this))
@@ -58,4 +64,6 @@ public class NumberButton extends Actor
             }
         }
     }
+    
+    
 }

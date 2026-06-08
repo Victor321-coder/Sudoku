@@ -1,4 +1,5 @@
 import greenfoot.*;
+import greenfoot.MouseInfo;
 
 public class MyWorld extends World
 {
@@ -6,17 +7,27 @@ public class MyWorld extends World
     public static Cell[][] board = new Cell[9][9];
 
     private int[][] puzzle;
+    private int[][] solution;
     private int startX, startY, size;
 
     private static boolean pencilMode = false;
 
+    
+    private MouseInfo mouse;
+    
     // Timer variables
     private long startTime;
     private boolean timerRunning;
 
+
     public MyWorld()
     {
         super(1000, 700, 1);
+
+
+        int boardNum= Greenfoot.getRandomNumber(9);
+        puzzle=PuzzleSelecter.getBoard(1, boardNum);
+        solution = PuzzleSelecter.getSolution(1, boardNum);
 
         startX = 80;
         startY = 160;
@@ -44,8 +55,17 @@ public class MyWorld extends World
 
     public void act()
     {
-        checkUserInput();
+
+        if(Greenfoot.mouseClicked(null)){
+            mouse=Greenfoot.getMouseInfo();
+            checkCellSelection();
+            checkNumberSelection();
+        }
+        
+
+        //checkUserInput();
         updateTimer();
+
     }
 
     private void createBoard()
@@ -93,21 +113,14 @@ public class MyWorld extends World
             }
         }
     }
-
-    private void checkUserInput()
-    {
-        if(!Greenfoot.mouseClicked(null))
-        {
-            return;
-        }
-
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-
+    public void checkCellSelection(){
         if(mouse == null)
         {
             return;
         }
-
+        
+        //must use coordinate system because UI element layers on top of the cells
+        //so mouseClicked() method doesn't work
         int boardX = startX - size / 2;
         int boardY = startY - size / 2;
 
@@ -125,6 +138,25 @@ public class MyWorld extends World
 
         selectCell(board[row][col]);
     }
+    
+    public void checkNumberSelection(){
+        if(mouse!=null ){
+            Actor clicked = mouse.getActor();
+            if(clicked instanceof NumberButton){
+                NumberButton button = (NumberButton) clicked;
+                int value = button.getValue();
+                if(checkValidMove(selectedCell, value)){
+                    selectedCell.setValue(value);
+                }else{
+                    System.out.println(
+                        "Invalid move! " +
+                        value +
+                        " already exists in that row, column, or box."
+                    );
+                }
+            }
+        }
+    }
 
     public static void selectCell(Cell cell)
     {
@@ -140,6 +172,15 @@ public class MyWorld extends World
             selectedCell.setSelected(true);
         }
     }
+    
+    private boolean checkValidMove(Cell cell, int value){
+        if(solution[cell.getRow()][cell.getCol()]==value){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
 
     private void updateTimer()
     {
