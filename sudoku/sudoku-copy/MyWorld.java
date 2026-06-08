@@ -31,8 +31,7 @@ public class MyWorld extends World
 
         startX = 80;
         startY = 160;
-
-        puzzle = PuzzleSelecter.getBoard(1);
+        
 
         createBoard();
         createNumberPad();
