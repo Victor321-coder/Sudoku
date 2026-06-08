@@ -15,6 +15,7 @@ public class MyWorld extends World
     private static boolean pencilMode = false;
     
     private MouseInfo mouse;
+    
     public MyWorld()
     {
 
