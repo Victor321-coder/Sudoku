@@ -31,7 +31,7 @@ public class MyWorld extends World
 
         startX = 80;
         startY = 160;
-
+        
 
         createBoard();
         createNumberPad();
