@@ -49,19 +49,8 @@ public class NumberButton extends Actor
                 return;
             }
 
-            // Normal mode
-            if(MyWorld.isValidMove(cell, number))
-            {
-                cell.setValue(number);
-            }
-            else
-            {
-                System.out.println(
-                    "Invalid move! " +
-                    number +
-                    " already exists in that row, column, or box."
-                );
-            }
+            // cell.setValue(number);
+            
         }
     }
     

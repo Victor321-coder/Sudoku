@@ -12,31 +12,29 @@ public class MyWorld extends World
 
     private static boolean pencilMode = false;
 
-    
     private MouseInfo mouse;
-    
+
     // Timer variables
     private long startTime;
     private boolean timerRunning;
-
 
     public MyWorld()
     {
         super(1000, 700, 1);
 
+        int boardNum = Greenfoot.getRandomNumber(9);
 
-        int boardNum= Greenfoot.getRandomNumber(9);
-        puzzle=PuzzleSelecter.getBoard(1, boardNum);
+        puzzle = PuzzleSelecter.getBoard(1, boardNum);
         solution = PuzzleSelecter.getSolution(1, boardNum);
 
         startX = 80;
         startY = 160;
-        
 
         createBoard();
         createNumberPad();
 
         Border border = new Border(size);
+
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
         int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
 
@@ -54,17 +52,14 @@ public class MyWorld extends World
 
     public void act()
     {
-
-        if(Greenfoot.mouseClicked(null)){
-            mouse=Greenfoot.getMouseInfo();
+        if(Greenfoot.mouseClicked(null))
+        {
+            mouse = Greenfoot.getMouseInfo();
             checkCellSelection();
             checkNumberSelection();
         }
-        
 
-        //checkUserInput();
         updateTimer();
-
     }
 
     private void createBoard()
@@ -85,8 +80,7 @@ public class MyWorld extends World
 
                 board[r][c] = cell;
 
-                addObject(
-                    cell,
+                addObject(cell,
                     startX + c * size,
                     startY + r * size
                 );
@@ -102,8 +96,7 @@ public class MyWorld extends World
         {
             for(int c = 0; c < 3; c++)
             {
-                addObject(
-                    new NumberButton(num),
+                addObject(new NumberButton(num),
                     750 + c * 100,
                     250 + r * 100
                 );
@@ -112,14 +105,14 @@ public class MyWorld extends World
             }
         }
     }
-    public void checkCellSelection(){
+
+    public void checkCellSelection()
+    {
         if(mouse == null)
         {
             return;
         }
-        
-        //must use coordinate system because UI element layers on top of the cells
-        //so mouseClicked() method doesn't work
+
         int boardX = startX - size / 2;
         int boardY = startY - size / 2;
 
@@ -137,22 +130,33 @@ public class MyWorld extends World
 
         selectCell(board[row][col]);
     }
-    
-    public void checkNumberSelection(){
-        if(mouse!=null ){
-            Actor clicked = mouse.getActor();
-            if(clicked instanceof NumberButton){
-                NumberButton button = (NumberButton) clicked;
-                int value = button.getValue();
-                if(checkValidMove(selectedCell, value)){
-                    selectedCell.setValue(value);
-                }else{
-                    System.out.println(
-                        "Invalid move! " +
-                        value +
-                        " already exists in that row, column, or box."
-                    );
-                }
+
+    public void checkNumberSelection()
+    {
+        if(mouse == null || selectedCell == null)
+        {
+            return;
+        }
+
+        Actor clicked = mouse.getActor();
+
+        if(clicked instanceof NumberButton)
+        {
+            NumberButton button = (NumberButton) clicked;
+            int value = button.getValue();
+
+            selectedCell.setValue(value);
+
+            int correctValue =
+                solution[selectedCell.getRow()][selectedCell.getCol()];
+
+            if(value == correctValue)
+            {
+                selectedCell.setWrong(false);
+            }
+            else
+            {
+                selectedCell.setWrong(true);
             }
         }
     }
@@ -171,15 +175,6 @@ public class MyWorld extends World
             selectedCell.setSelected(true);
         }
     }
-    
-    private boolean checkValidMove(Cell cell, int value){
-        if(solution[cell.getRow()][cell.getCol()]==value){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
 
     private void updateTimer()
     {
@@ -194,8 +189,7 @@ public class MyWorld extends World
         int minutes = (int)(elapsedSeconds / 60);
         int seconds = (int)(elapsedSeconds % 60);
 
-        String time =
-            String.format("%02d:%02d", minutes, seconds);
+        String time = String.format("%02d:%02d", minutes, seconds);
 
         showText("Time: " + time, 850, 80);
     }
@@ -211,55 +205,6 @@ public class MyWorld extends World
         timerRunning = true;
     }
 
-    public void makeMove()
-    {
-        // TODO
-    }
-
-    public static boolean isValidMove(Cell cell, int number)
-    {
-        int row = cell.getRow();
-        int col = cell.getCol();
-
-        // Row check
-        for(int c = 0; c < 9; c++)
-        {
-            if(board[row][c] != cell &&
-               board[row][c].getValue() == number)
-            {
-                return false;
-            }
-        }
-
-        // Column check
-        for(int r = 0; r < 9; r++)
-        {
-            if(board[r][col] != cell &&
-               board[r][col].getValue() == number)
-            {
-                return false;
-            }
-        }
-
-        // Box check
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
-
-        for(int r = startRow; r < startRow + 3; r++)
-        {
-            for(int c = startCol; c < startCol + 3; c++)
-            {
-                if(board[r][c] != cell &&
-                   board[r][c].getValue() == number)
-                {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
     public void restart()
     {
         resetTimer();
@@ -270,8 +215,6 @@ public class MyWorld extends World
 
         createBoard();
     }
-
-    
 
     public static void setPencilMode(boolean state)
     {
@@ -287,8 +230,6 @@ public class MyWorld extends World
     {
         return pencilMode;
     }
-
-    
 
     public Cell getSelectedCell()
     {

@@ -5,6 +5,7 @@ public class Cell extends Actor
     private int value;
     private boolean fixed;
     private boolean selected = false;
+    private boolean wrong = false;
 
     private int row;
     private int col;
@@ -26,6 +27,11 @@ public class Cell extends Actor
 
     public void act()
     {
+    }
+    
+    public void setWrong(boolean wrong) {
+        this.wrong = wrong;
+        draw();
     }
 
     public void setSelected(boolean selected)
@@ -123,7 +129,18 @@ public class Cell extends Actor
             }
             else
             {
-                img.setColor(Color.BLACK);
+                if(wrong)
+                { 
+                    img.setColor(Color.RED);
+                }
+                else if(fixed)
+                {
+                    img.setColor(new Color(0, 70, 180));
+                }
+                else
+                {
+                    img.setColor(Color.BLACK);
+                }
             }
 
             img.setFont(new Font("Arial", false, false, 28));
