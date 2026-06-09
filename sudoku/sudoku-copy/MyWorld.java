@@ -26,10 +26,12 @@ public class MyWorld extends World
     {
         super(1000, 700, 1);
 
-        int boardNum = Greenfoot.getRandomNumber(9);
+        int boardNum = Greenfoot.getRandomNumber(10);
 
-        puzzle = PuzzleSelecter.getBoard(1, boardNum);
-        solution = PuzzleSelecter.getSolution(1, boardNum);
+        int difficulty = DifficultyManager.getDifficulty();
+
+        puzzle = PuzzleSelecter.getBoard(difficulty, boardNum);
+        solution = PuzzleSelecter.getSolution(difficulty, boardNum);
 
         startX = 80;
         startY = 160;
