@@ -37,16 +37,18 @@ public class MyWorld extends World
         createNumberPad();
 
         Border border = new Border(size);
-        int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
-        int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
+        int borderX = startX - size / 2 + border.getImage().getWidth() / 2-1;
+        int borderY = startY - size / 2 + border.getImage().getHeight() / 2-1;
 
         addObject(border, borderX, borderY);
-
+        CellOutline cellOutline = new CellOutline(size);
+        addObject(cellOutline,borderX,borderY);
+        
         addObject(new Restart(), 675, 150);
         addObject(new EraserButton(), 846, 158);
         addObject(new PencilButton(), 948, 158);
 
-        setPaintOrder(Border.class, Cell.class, NumberButton.class);
+        setPaintOrder(CellOutline.class, Border.class, Cell.class, NumberButton.class);
 
         startTime = System.currentTimeMillis();
         timerRunning = true;
@@ -82,9 +84,10 @@ public class MyWorld extends World
                     c,
                     size
                 );
-
+                
+                cell.setColor(new Color(168,168,168));
                 board[r][c] = cell;
-
+                
                 addObject(
                     cell,
                     startX + c * size,
@@ -134,8 +137,10 @@ public class MyWorld extends World
 
         int col = (mouseX - boardX) / size;
         int row = (mouseY - boardY) / size;
-
-        selectCell(board[row][col]);
+        if(!board[row][col].isFixed()){
+            selectCell(board[row][col]);
+        }
+        
     }
     
     public void checkNumberSelection(){
@@ -216,49 +221,49 @@ public class MyWorld extends World
         // TODO
     }
 
-    public static boolean isValidMove(Cell cell, int number)
-    {
-        int row = cell.getRow();
-        int col = cell.getCol();
+    // public static boolean isValidMove(Cell cell, int number)
+    // {
+        // int row = cell.getRow();
+        // int col = cell.getCol();
 
-        // Row check
-        for(int c = 0; c < 9; c++)
-        {
-            if(board[row][c] != cell &&
-               board[row][c].getValue() == number)
-            {
-                return false;
-            }
-        }
+        // // Row check
+        // for(int c = 0; c < 9; c++)
+        // {
+            // if(board[row][c] != cell &&
+               // board[row][c].getValue() == number)
+            // {
+                // return false;
+            // }
+        // }
 
-        // Column check
-        for(int r = 0; r < 9; r++)
-        {
-            if(board[r][col] != cell &&
-               board[r][col].getValue() == number)
-            {
-                return false;
-            }
-        }
+        // // Column check
+        // for(int r = 0; r < 9; r++)
+        // {
+            // if(board[r][col] != cell &&
+               // board[r][col].getValue() == number)
+            // {
+                // return false;
+            // }
+        // }
 
-        // Box check
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
+        // // Box check
+        // int startRow = (row / 3) * 3;
+        // int startCol = (col / 3) * 3;
 
-        for(int r = startRow; r < startRow + 3; r++)
-        {
-            for(int c = startCol; c < startCol + 3; c++)
-            {
-                if(board[r][c] != cell &&
-                   board[r][c].getValue() == number)
-                {
-                    return false;
-                }
-            }
-        }
+        // for(int r = startRow; r < startRow + 3; r++)
+        // {
+            // for(int c = startCol; c < startCol + 3; c++)
+            // {
+                // if(board[r][c] != cell &&
+                   // board[r][c].getValue() == number)
+                // {
+                    // return false;
+                // }
+            // }
+        // }
 
-        return true;
-    }
+        // return true;
+    // }
 
     public void restart()
     {
