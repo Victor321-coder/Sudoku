@@ -1,10 +1,11 @@
 import greenfoot.*;
 import greenfoot.MouseInfo;
-
+import java.util.*;
 public class MyWorld extends World
 {
     public static Cell selectedCell;
     public static Cell[][] board = new Cell[9][9];
+    public String[] correctKey = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
     private int[][] puzzle;
     private int[][] solution;
@@ -13,6 +14,7 @@ public class MyWorld extends World
     private static boolean pencilMode = false;
 
     private MouseInfo mouse;
+    private EraserButton eraserButton=new EraserButton();
 
     // Timer variables
     private long startTime;
@@ -50,8 +52,9 @@ public class MyWorld extends World
         addObject(cellOutline, borderX, borderY);
 
         addObject(new Restart(), 675, 150);
-        addObject(new EraserButton(), 846, 158);
+        addObject(eraserButton, 846, 158);
         addObject(new PencilButton(), 948, 158);
+        
 
         setPaintOrder(CellOutline.class, Border.class, Cell.class, NumberButton.class);
 
@@ -66,8 +69,8 @@ public class MyWorld extends World
             mouse = Greenfoot.getMouseInfo();
             checkCellSelection();
             checkNumberSelection();
-            //checkKeyboardInput();
         }
+        checkKeyboardInput();
 
         updateTimer();
         showText("Score: " + score, 850, 120);
@@ -241,7 +244,30 @@ public class MyWorld extends World
         addScore(50);
     }
 
-    // ---------------- SELECTION ----------------
+    public void checkKeyboardInput(){
+        String keyPressed = Greenfoot.getKey();
+        if(keyPressed!=null){
+            
+            if(Arrays.asList(correctKey).contains(keyPressed)){
+                selectedCell.setValue(Integer.parseInt(keyPressed));
+                int correctValue =
+                solution[selectedCell.getRow()][selectedCell.getCol()];
+
+                if(Integer.parseInt(keyPressed) == correctValue)
+                {
+                    selectedCell.setWrong(false);
+                }
+                else
+                {
+                    selectedCell.setWrong(true);
+                }
+            }
+            if(keyPressed=="backspace"){
+                eraserButton.clickButton();
+            }
+        }
+    }
+    
 
     public static void selectCell(Cell cell)
     {
