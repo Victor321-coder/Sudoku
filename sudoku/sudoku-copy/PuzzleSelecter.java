@@ -751,6 +751,20 @@ public class PuzzleSelecter extends Actor
         puzzleEasy10
         
     };
+    private static final int[][][] EASY_SOLUTION = {
+        solutionEasy1,
+        solutionEasy2,
+        solutionEasy3,
+        solutionEasy4,
+        solutionEasy5,
+        solutionEasy6,
+        solutionEasy7,
+        solutionEasy8,
+        solutionEasy9,
+        solutionEasy10
+        
+    };
+    
     
     private static final int[][][] MEDIUM_BOARDS =
     {
@@ -765,6 +779,19 @@ public class PuzzleSelecter extends Actor
         puzzleMedium9,
         puzzleMedium10
     };
+    private static final int[][][] MEDIUM_SOLUTION =
+    {
+        solutionMedium1,
+        solutionMedium2,
+        solutionMedium3,
+        solutionMedium4,
+        solutionMedium5,
+        solutionMedium6,
+        solutionMedium7,
+        solutionMedium8,
+        solutionMedium9,
+        solutionMedium10
+    };
     
     private static final int[][][] HARD_BOARDS=
     {
@@ -778,6 +805,19 @@ public class PuzzleSelecter extends Actor
         puzzleHard8,
         puzzleHard9,
         puzzleHard10
+    };
+    private static final int[][][] HARD_SOLUTION=
+    {
+        solutionHard1,
+        solutionHard2,
+        solutionHard3,
+        solutionHard4,
+        solutionHard5,
+        solutionHard6,
+        solutionHard7,
+        solutionHard8,
+        solutionHard9,
+        solutionHard10
     };
     
     private static final int[][][] EASY_SOLUTION_BOARDS = {
@@ -823,9 +863,8 @@ public class PuzzleSelecter extends Actor
     };
     
     //difficulty: easy=1, medium=2, hard=3
-    public static int[][] getBoard(int difficulty){
-        int boardNum = Greenfoot.getRandomNumber(10);
-        int board[][];
+    public static int[][] getBoard(int difficulty, int num){
+        int boardNum = num;
         if(difficulty==1){
             return copyBoard(EASY_BOARDS[boardNum]);
         }else if(difficulty==2){
@@ -837,18 +876,17 @@ public class PuzzleSelecter extends Actor
         return copyBoard(EASY_BOARDS[0]);
     }
     
-    public static int[][] getSolutionBoard (int difficulty) {
-        int boardNum = Greenfoot.getRandomNumber(10);
-        int board[][];
+    public static int[][] getSolution(int difficulty, int num){
+        int boardNum = num;
         if(difficulty==1){
-            return copyBoard(EASY_SOLUTION_BOARDS[boardNum]);
+            return copyBoard(EASY_SOLUTION[boardNum]);
         }else if(difficulty==2){
-            return copyBoard(MEDIUM_SOLUTION_BOARDS[boardNum]);
+            return copyBoard(MEDIUM_SOLUTION[boardNum]);
         }else if(difficulty==3){
-            return copyBoard(HARD_SOLUTION_BOARDS[boardNum]);
+            return copyBoard(HARD_SOLUTION[boardNum]);
         }
         
-        return copyBoard(EASY_SOLUTION_BOARDS[0]);
+        return copyBoard(EASY_SOLUTION[0]);
     }
     
     private static int[][] copyBoard(int[][] original){

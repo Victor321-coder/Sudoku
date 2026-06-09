@@ -4,11 +4,11 @@ public class StartScreen extends World
 {
     public StartScreen()
     {
-        super(1188, 766, 1);
+        super(1000, 700, 1);
 
         // Load and scale background image
-        GreenfootImage bg = new GreenfootImage("starting_screen.png");
-        bg.scale(1188, 766);
+        GreenfootImage bg = new GreenfootImage("start_screen.png");
+        bg.scale(1000, 700);
         setBackground(bg);
 
         // Profile panel
