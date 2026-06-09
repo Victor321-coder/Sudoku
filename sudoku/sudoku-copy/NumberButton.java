@@ -31,39 +31,39 @@ public class NumberButton extends Actor
         return number;
     }
 
-    public void userNumberSelect()
-    {
-        if(Greenfoot.mouseClicked(this))
-        {
-            Cell cell = MyWorld.selectedCell;
+    // public void userNumberSelect()
+    // {
+        // if(Greenfoot.mouseClicked(this))
+        // {
+            // Cell cell = MyWorld.selectedCell;
 
-            if(cell == null)
-            {
-                return;
-            }
+            // if(cell == null)
+            // {
+                // return;
+            // }
 
-            // Pencil mode ON
-            if(MyWorld.isPencilMode())
-            {
-                cell.togglePencilMark(number);
-                return;
-            }
+            // // Pencil mode ON
+            // if(MyWorld.isPencilMode())
+            // {
+                // cell.togglePencilMark(number);
+                // return;
+            // }
 
-            // Normal mode
-            if(MyWorld.isValidMove(cell, number))
-            {
-                cell.setValue(number);
-            }
-            else
-            {
-                System.out.println(
-                    "Invalid move! " +
-                    number +
-                    " already exists in that row, column, or box."
-                );
-            }
-        }
-    }
+            // // Normal mode
+            // if(MyWorld.isValidMove(cell, number))
+            // {
+                // cell.setValue(number);
+            // }
+            // else
+            // {
+                // System.out.println(
+                    // "Invalid move! " +
+                    // number +
+                    // " already exists in that row, column, or box."
+                // );
+            // }
+        // }
+    // }
     
     
 }

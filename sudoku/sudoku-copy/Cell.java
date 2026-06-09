@@ -9,6 +9,8 @@ public class Cell extends Actor
     private int row;
     private int col;
     private int size;
+    GreenfootImage img;
+    private Color backgroundColor = Color.WHITE;
 
     // Pencil marks (1-9)
     private boolean[] pencilMarks = new boolean[10];
@@ -20,10 +22,13 @@ public class Cell extends Actor
         this.row = row;
         this.col = col;
         this.size = size;
+        img = new GreenfootImage(size, size);
 
+        
+    }
+    public void addedToWorld(World w){
         draw();
     }
-
     public void act()
     {
     }
@@ -31,6 +36,7 @@ public class Cell extends Actor
     public void setSelected(boolean selected)
     {
         this.selected = selected;
+        
         draw();
     }
 
@@ -96,41 +102,54 @@ public class Cell extends Actor
     {
         return col;
     }
+    public boolean isFixed(){
+        return fixed;
+    }
+    public void setColor(Color color){
+        backgroundColor=color;
+        draw();
+    }
+    public void checkSelected(){
+        if(selected){
+            setColor(new Color(200, 220, 255));
+        }else{
+            img.setColor(backgroundColor);
+        }
+    }
 
     private void draw()
     {
-        GreenfootImage img = new GreenfootImage(size, size);
-
+        
+        
         if(selected)
         {
             img.setColor(new Color(200, 220, 255));
+    
+        }
+        else if(fixed)
+        {
+            img.setColor(new Color(255, 171, 171));
+    
         }
         else
         {
             img.setColor(Color.WHITE);
+
         }
-
+        
         img.fillRect(0, 0, size, size);
-
-        img.setColor(Color.GRAY);
         img.drawRect(0, 0, size - 1, size - 1);
 
+        
         if(value != 0)
         {
-            if(fixed)
-            {
-                img.setColor(new Color(0, 70, 180));
-            }
-            else
-            {
-                img.setColor(Color.BLACK);
-            }
+            
+            img.setColor(Color.BLACK);
+            
 
             img.setFont(new Font("Arial", false, false, 28));
             img.drawString("" + value, 24, 38);
-        }
-        else
-        {
+        }else{
             // Draw pencil marks
             img.setColor(Color.GRAY);
             img.setFont(new Font("Arial", false, false, 12));
