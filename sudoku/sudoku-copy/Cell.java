@@ -125,58 +125,56 @@ public class Cell extends Actor
 
     private void draw()
     {
-        
-        
+        img.clear();
+
+        // Background
         if(selected)
         {
             img.setColor(new Color(200, 220, 255));
-    
-        }
-        else if(fixed)
-        {
-            img.setColor(new Color(255, 171, 171));
-    
         }
         else
         {
             img.setColor(Color.WHITE);
-
         }
-        
+
         img.fillRect(0, 0, size, size);
+
+        // Cell border
+        img.setColor(Color.LIGHT_GRAY);
         img.drawRect(0, 0, size - 1, size - 1);
 
-        
         if(value != 0)
         {
-
+            // Number colors
             if(fixed)
             {
-                img.setColor(new Color(0, 70, 180));
+                img.setColor(Color.BLACK);      // Fixed numbers
+            }
+            else if(wrong)
+            {
+                img.setColor(Color.RED);        // Wrong user entry
             }
             else
             {
-                if(wrong)
-                { 
-                    img.setColor(Color.RED);
-                }
-                else if(fixed)
-                {
-                    img.setColor(new Color(0, 70, 180));
-                }
-                else
-                {
-                    img.setColor(Color.BLACK);
-                }
+                img.setColor(Color.BLUE);       // Correct user entry
             }
 
             img.setFont(new Font("Arial", false, false, 28));
-            img.drawString("" + value, 24, 38);
-        }else{
-            // Draw pencil marks
+
+            String text = String.valueOf(value);
+
+            int textWidth = text.length() * 15;
+            int x = (size - textWidth) / 2;
+            int y = size / 2 + 10;
+
+            img.drawString(text, x, y);
+        }
+        else
+        {
+            // Pencil marks
             img.setColor(Color.GRAY);
             img.setFont(new Font("Arial", false, false, 12));
-
+    
             for(int n = 1; n <= 9; n++)
             {
                 if(pencilMarks[n])
@@ -190,7 +188,7 @@ public class Cell extends Actor
                     img.drawString("" + n, x, y);
                 }
             }
-        }
+        }   
 
         setImage(img);
     }
