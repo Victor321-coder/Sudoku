@@ -49,13 +49,10 @@ public class NumberButton extends Actor
                 // return;
             // }
 
-<<<<<<< HEAD
+
             // cell.setValue(number);
             
-        }
-    }
-=======
-            // // Normal mode
+             // // Normal mode
             // if(MyWorld.isValidMove(cell, number))
             // {
                 // cell.setValue(number);
@@ -70,7 +67,6 @@ public class NumberButton extends Actor
             // }
         // }
     // }
->>>>>>> a306f159a7ff701987dc1b58a05e549e206bd9c0
     
     
 }

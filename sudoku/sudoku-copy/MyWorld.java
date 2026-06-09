@@ -34,14 +34,10 @@ public class MyWorld extends World
         createNumberPad();
 
         Border border = new Border(size);
-<<<<<<< HEAD
 
-        int borderX = startX - size / 2 + border.getImage().getWidth() / 2;
-        int borderY = startY - size / 2 + border.getImage().getHeight() / 2;
-=======
         int borderX = startX - size / 2 + border.getImage().getWidth() / 2-1;
         int borderY = startY - size / 2 + border.getImage().getHeight() / 2-1;
->>>>>>> a306f159a7ff701987dc1b58a05e549e206bd9c0
+
 
         addObject(border, borderX, borderY);
         CellOutline cellOutline = new CellOutline(size);
@@ -87,14 +83,10 @@ public class MyWorld extends World
                 
                 cell.setColor(new Color(168,168,168));
                 board[r][c] = cell;
-<<<<<<< HEAD
 
-                addObject(cell,
-=======
                 
                 addObject(
                     cell,
->>>>>>> a306f159a7ff701987dc1b58a05e549e206bd9c0
                     startX + c * size,
                     startY + r * size
                 );
@@ -221,12 +213,7 @@ public class MyWorld extends World
         timerRunning = true;
     }
 
-<<<<<<< HEAD
-=======
-    public void makeMove()
-    {
-        // TODO
-    }
+
 
     // public static boolean isValidMove(Cell cell, int number)
     // {
@@ -272,7 +259,7 @@ public class MyWorld extends World
         // return true;
     // }
 
->>>>>>> a306f159a7ff701987dc1b58a05e549e206bd9c0
+
     public void restart()
     {
         resetTimer();

@@ -149,7 +149,7 @@ public class Cell extends Actor
         
         if(value != 0)
         {
-<<<<<<< HEAD
+
             if(fixed)
             {
                 img.setColor(new Color(0, 70, 180));
@@ -169,11 +169,6 @@ public class Cell extends Actor
                     img.setColor(Color.BLACK);
                 }
             }
-=======
-            
-            img.setColor(Color.BLACK);
-            
->>>>>>> a306f159a7ff701987dc1b58a05e549e206bd9c0
 
             img.setFont(new Font("Arial", false, false, 28));
             img.drawString("" + value, 24, 38);
