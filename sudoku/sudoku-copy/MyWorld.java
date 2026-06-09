@@ -64,6 +64,7 @@ public class MyWorld extends World
             mouse = Greenfoot.getMouseInfo();
             checkCellSelection();
             checkNumberSelection();
+            checkKeyboardInput();
         }
 
         updateTimer();
