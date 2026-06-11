@@ -2,10 +2,11 @@ import greenfoot.*;
 
 public class DifficultyButton extends Actor
 {
-    private int difficulty = 1;
+    private int difficulty;
 
     public DifficultyButton()
     {
+        difficulty = DifficultyManager.getDifficulty();
         updateImage();
     }
 
@@ -23,6 +24,8 @@ public class DifficultyButton extends Actor
             DifficultyManager.setDifficulty(difficulty);
 
             updateImage();
+
+            Greenfoot.setWorld(new MyWorld());
         }
     }
 
@@ -43,17 +46,16 @@ public class DifficultyButton extends Actor
             text = "Hard";
         }
 
-        GreenfootImage img =
-            new GreenfootImage(180, 50);
+        GreenfootImage img = new GreenfootImage(180, 50);
 
-        img.setColor(new Color(240,240,240));
-        img.fillRect(0,0,180,50);
+        img.setColor(new Color(240, 240, 240));
+        img.fillRect(0, 0, 180, 50);
 
         img.setColor(Color.BLACK);
-        img.drawRect(0,0,179,49);
+        img.drawRect(0, 0, 179, 49);
 
-        img.setFont(new Font("Arial", true, false, 22));
-        img.drawString("Difficulty: " + text, 10, 30);
+        img.setFont(new Font("Arial", true, false, 20));
+        img.drawString("Difficulty: " + text, 5, 30);
 
         setImage(img);
     }

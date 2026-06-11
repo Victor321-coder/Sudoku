@@ -55,11 +55,31 @@ public class MyWorld extends World
         addObject(eraserButton, 846, 158);
         addObject(new PencilButton(), 948, 158);
         
+        addObject(new DifficultyButton(), 850, 600);
+        
+        
+        
 
         setPaintOrder(CellOutline.class, Border.class, Cell.class, NumberButton.class);
 
         startTime = System.currentTimeMillis();
         timerRunning = true;
+        
+        if(Greenfoot.mouseClicked(this))
+        {
+            difficulty++;
+
+        if(difficulty > 3)
+        {
+            difficulty = 1;
+        }
+
+        DifficultyManager.setDifficulty(difficulty);
+
+        
+
+        Greenfoot.setWorld(new MyWorld());
+        }
     }
 
     public void act()

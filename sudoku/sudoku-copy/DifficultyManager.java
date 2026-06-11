@@ -1,6 +1,6 @@
 public class DifficultyManager
 {
-    private static int difficulty = 1; // 1=Easy, 2=Medium, 3=Hard
+    private static int difficulty = 1;
 
     public static void setDifficulty(int d)
     {
