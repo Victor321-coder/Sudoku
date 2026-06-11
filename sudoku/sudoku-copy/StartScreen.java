@@ -18,9 +18,9 @@ public class StartScreen extends World
         addObject(new CurrencyBar(), 650, 50);
 
         // Play Sudoku button
-        PlayButton play = new PlayButton("PLAY SUDOKU", 430,100);
-        //play.getImage().setTransparency(0);
-        addObject(play, 500, 490);
+        InfoButton1 button = new InfoButton1(430,200);
+        button.getImage().setTransparency(0);
+        addObject(button, 500, 525);
 
         // Daily Puzzle button
         // PlayButton daily = new PlayButton("DAILY PUZZLE");
