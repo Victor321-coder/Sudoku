@@ -143,11 +143,9 @@ public class MyWorld extends World
 
         int col = (mouseX - boardX) / size;
         int row = (mouseY - boardY) / size;
-
-        if(!board[row][col].isFixed())
-        {
-            selectCell(board[row][col]);
-        }
+        
+        selectCell(board[row][col]);
+        
     }
 
     public void checkNumberSelection()
@@ -160,8 +158,11 @@ public class MyWorld extends World
         {
             NumberButton button = (NumberButton) clicked;
             int value = button.getValue();
-
-            selectedCell.setValue(value);
+            
+            if(selectedCell.isFixed()==false){
+                selectedCell.setValue(value);
+            }
+            
 
             int correctValue =
                 solution[selectedCell.getRow()][selectedCell.getCol()];
@@ -249,7 +250,10 @@ public class MyWorld extends World
         if(keyPressed!=null){
             
             if(Arrays.asList(correctKey).contains(keyPressed)){
-                selectedCell.setValue(Integer.parseInt(keyPressed));
+                if(selectedCell.isFixed()==false){
+                    selectedCell.setValue(Integer.parseInt(keyPressed));
+                }
+            
                 int correctValue =
                 solution[selectedCell.getRow()][selectedCell.getCol()];
 
