@@ -4,7 +4,7 @@ public class HintButton extends UI
 {
     private GreenfootImage uiImg = new GreenfootImage("HintUI.png");
     private ButtonOutline outline;
-
+    private Cell selectedCell;
     private boolean active = false;
 
     public HintButton()
@@ -22,6 +22,7 @@ public class HintButton extends UI
 
     public void clickButton()
     {
+        World world = getWorld(); 
         active = !active;
 
         if (outline != null)
@@ -29,7 +30,10 @@ public class HintButton extends UI
             outline.setVisibility(active);
         }
 
-        MyWorld.setPencilMode(active);
+        selectedCell = MyWorld.selectedCell;
+        if(selectedCell != null){
+            selectedCell.setValue(((MyWorld)world).getHintCell());   
+        }
     }
 
     protected void addedToWorld(World world)

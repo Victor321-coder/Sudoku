@@ -51,7 +51,7 @@ public class MyWorld extends World
         CellOutline cellOutline = new CellOutline(size);
         addObject(cellOutline, borderX, borderY);
 
-        addObject(new Restart(), 675, 158);
+        addObject(new Restart(), 650, 158);
         addObject(new HintButton(), 750, 158);
         addObject(eraserButton, 846, 158);
         addObject(new PencilButton(), 948, 158);
@@ -365,5 +365,9 @@ public class MyWorld extends World
     public Cell getSelectedCell()
     {
         return selectedCell;
+    }
+    
+    public int getHintCell() {
+        return solution[selectedCell.getRow()][selectedCell.getCol()];
     }
 }
