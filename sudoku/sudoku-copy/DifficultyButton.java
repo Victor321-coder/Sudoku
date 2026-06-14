@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class DifficultyButton extends Actor
+public class DifficultyButton extends Actor    
 {
     private int difficulty;
 
@@ -14,6 +14,8 @@ public class DifficultyButton extends Actor
     {
         if(Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("clicksoundeffect.wav");
+            
             difficulty++;
 
             if(difficulty > 3)
