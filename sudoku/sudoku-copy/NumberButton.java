@@ -24,6 +24,11 @@ public class NumberButton extends Actor
     public void act()
     {
         // userNumberSelect();
+        if(Greenfoot.mouseClicked(this)){
+
+            Greenfoot.playSound("clicksoundeffect.wav");
+
+        }
     }
 
     

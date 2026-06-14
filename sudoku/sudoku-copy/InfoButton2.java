@@ -29,6 +29,7 @@ public class InfoButton2 extends Buttons
     {
         if (Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("clicksoundeffect.wav");    
             Greenfoot.setWorld(new InfoPage2());
         }
     }

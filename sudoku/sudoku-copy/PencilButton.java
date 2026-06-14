@@ -17,6 +17,7 @@ public class PencilButton extends UI
         if (Greenfoot.mouseClicked(this) ||
             (outline != null && Greenfoot.mouseClicked(outline)))
         {
+            Greenfoot.playSound("clicksoundeffect.wav");
             clickButton();
         }
     }

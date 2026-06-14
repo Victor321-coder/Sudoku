@@ -20,6 +20,7 @@ public class BackButton extends Actor
     {
         if (Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("clicksoundeffect.wav");
             Greenfoot.setWorld(new StartScreen());
         }
     }

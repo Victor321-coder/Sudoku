@@ -26,6 +26,7 @@ public class PlayButton extends Buttons
     {
         if (Greenfoot.mouseClicked(this))
         {
+            Greenfoot.playSound("clicksoundeffect.wav");
             Greenfoot.setWorld(new MyWorld());
         }
     }

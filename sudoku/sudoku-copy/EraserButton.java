@@ -12,6 +12,7 @@ public class EraserButton extends UI
     
     public void act(){
         if(Greenfoot.mouseClicked(this)){
+            Greenfoot.playSound("clicksoundeffect.wav");
             clickButton();
         }
     }
