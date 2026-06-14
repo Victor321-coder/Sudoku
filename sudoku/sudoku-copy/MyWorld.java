@@ -23,6 +23,9 @@ public class MyWorld extends World
     // SCORE SYSTEM
     private int score = 0;
     private long lastMoveTime = System.currentTimeMillis();
+    
+    // Greenfoot Sound
+    private static GreenfootSound backgroundMusic = new GreenfootSound ("background music.wav");
 
     public MyWorld()
     {
@@ -58,8 +61,8 @@ public class MyWorld extends World
         
         addObject(new DifficultyButton(), 850, 600);
         
-        
-        
+        backgroundMusic.setVolume(100); 
+        backgroundMusic.playLoop();
 
         setPaintOrder(CellOutline.class, Border.class, Cell.class, NumberButton.class);
 
@@ -77,12 +80,20 @@ public class MyWorld extends World
 
         DifficultyManager.setDifficulty(difficulty);
 
-        
-
         Greenfoot.setWorld(new MyWorld());
         }
     }
 
+    //Starts music when the user presses the run button
+    public void started () {
+        backgroundMusic.playLoop();
+    }
+    
+    //Stops the music when the user presses the pause button
+    public void stopped() {
+        backgroundMusic.pause();
+    }
+    
     public void act()
     {
         if(Greenfoot.mouseClicked(null))
