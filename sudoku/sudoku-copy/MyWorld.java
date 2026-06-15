@@ -149,13 +149,13 @@ public class MyWorld extends World
     private void createNumberPad()
     {
         int num = 1;
-
+    
         for(int r = 0; r < 3; r++)
         {
             for(int c = 0; c < 3; c++)
             {
                 addObject(new NumberButton(num),
-                    750 + c * 100,
+                    700 + c * 100,
                     250 + r * 100
                 );
                 num++;
