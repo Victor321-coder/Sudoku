@@ -158,7 +158,9 @@ public class MyWorld extends World
     }
 
     // ---------------- BOARD ----------------
-
+    /**
+     * 
+     */
     private void createBoard()
     {
         size = 60;
@@ -243,6 +245,8 @@ public class MyWorld extends World
             if(selectedCell.isFixed())
             {
                 return;
+            }else{
+                selectedCell.setValue(value);
             }
             checkCorrect();
         }
