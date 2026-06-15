@@ -821,6 +821,19 @@ public class PuzzleSelecter extends Actor
     };
     
     //difficulty: easy=1, medium=2, hard=3
+    /**
+     * getBoard(int difficulty, int num) is a public static method 
+     * that allows other classes to access the board stored in this class
+     * <p>
+     * Has a combined 30 board
+     * 
+     * @param difficulty    Difficulty level of the puzzle, 1: easy, 2: medium, 3: hard
+     * @param num           (0-9), able to retreive 1 of 10 board in each difficulty
+     * 
+     * 
+     * 
+     */
+    
     public static int[][] getBoard(int difficulty, int num){
         int boardNum = num;
         if(difficulty==1){
