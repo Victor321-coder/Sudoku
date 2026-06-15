@@ -327,57 +327,57 @@ public class MyWorld extends World
     // ---------------- HIGHLIGHT ----------------
 
     private void highlight(){
-        int row = selectedCell.getRow();
-        int col = selectedCell.getCol();
-        int gridX = col/3;
-        int gridY = row/3;
-        
-        //Gets corners of the grid that selected cell is in
-        int startX = gridX * 3;
-        int bottomX = gridX * 3 + 2;
-        int startY = gridY * 3;
-        int bottomY = gridY * 3 + 2;
+        if(selectedCell != null){
+            int row = selectedCell.getRow();
+            int col = selectedCell.getCol();
+            int gridX = col/3;
+            int gridY = row/3;
 
-        //Highlights grid
-        for(int r = startX; r < bottomX + 1; r++){
-            for(int c = startY; c < bottomY + 1; c++){
-                board[c][r].setHighlighted(true);
-                selectedCells.add(board[c][r]);
-            } 
-        }
+            //Gets corners of the grid that selected cell is in
+            int startX = gridX * 3;
+            int bottomX = gridX * 3 + 2;
+            int startY = gridY * 3;
+            int bottomY = gridY * 3 + 2;
 
-        //Highlights column
-        for(int r = 0; r < 9; r++){
-            board[r][col].setHighlighted(true);
-            selectedCells.add(board[r][col]);
-        }
-        
-        //Highlights row
-        for(int r = 0; r < 9; r++){
-            board[row][r].setHighlighted(true);
-            selectedCells.add(board[row][r]);
-        }
-        
-        //Allows the selected cell to be brighter than other highlighted cells
-        selectedCell.setHighlighted(false);
-    }
-
-    private static void unselectCells(){
-        //For every cell in arrayList, unhighlight them and remove from list
-        if(selectedCells.size() > 0){
-            for(Cell highlightedCell : selectedCells){
-                highlightedCell.setHighlighted(false);
+            //Highlights grid
+            for(int r = startX; r < bottomX + 1; r++){
+                for(int c = startY; c < bottomY + 1; c++){
+                    board[c][r].setHighlighted(true);
+                    selectedCells.add(board[c][r]);
+                } 
             }
 
-            for(int i = selectedCells.size() - 1; i >= 0; i--){
-                selectedCells.remove(i);
-            }    
+            //Highlights column
+            for(int r = 0; r < 9; r++){
+                board[r][col].setHighlighted(true);
+                selectedCells.add(board[r][col]);
+            }
+
+            //Highlights row
+            for(int r = 0; r < 9; r++){
+                board[row][r].setHighlighted(true);
+                selectedCells.add(board[row][r]);
+            }
+
+            //Allows the selected cell to be brighter than other highlighted cells
+            selectedCell.setHighlighted(false);
         }
 
     }
+    
+    private static void unselectCells(){
+            //For every cell in arrayList, unhighlight them and remove from list
+            if(selectedCells.size() > 0){
+                for(Cell highlightedCell : selectedCells){
+                    highlightedCell.setHighlighted(false);
+                }
 
+                for(int i = selectedCells.size() - 1; i >= 0; i--){
+                    selectedCells.remove(i);
+                }    
+            }
+        }
     // ---------------- TIMER ----------------
-
     private void updateTimer()
     {
         if(!timerRunning) return;
