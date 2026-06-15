@@ -63,7 +63,7 @@ public class MyWorld extends World
         addObject(eraserButton, 846, 158);
         addObject(new PencilButton(), 948, 158);
 
-        addObject(new DifficultyButton(), 850, 600);
+        addObject(new DifficultyButton(), 800, 600);
 
         backgroundMusic.setVolume(100); 
         backgroundMusic.playLoop();
@@ -109,7 +109,7 @@ public class MyWorld extends World
         checkKeyboardInput();
 
         updateTimer();
-        showText("Score: " + score, 850, 120);
+        showText("Score: " + score, 800, 100);
     }
 
     // ---------------- BOARD ----------------
@@ -390,7 +390,7 @@ public class MyWorld extends World
 
         String time = String.format("%02d:%02d", minutes, seconds);
 
-        showText("Time: " + time, 850, 80);
+        showText("Time: " + time, 800, 60);
     }
 
     public void stopTimer()
