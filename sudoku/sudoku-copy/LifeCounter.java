@@ -15,6 +15,7 @@ public class LifeCounter extends UI
     int life;
     public LifeCounter(int life){
         this.life=life;
+        updateDisplay();
     }
     public void updateDisplay(){
         GreenfootImage image = new GreenfootImage(
