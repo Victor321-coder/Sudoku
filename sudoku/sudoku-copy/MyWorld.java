@@ -244,9 +244,7 @@ public class MyWorld extends World
 
         if(selectedCell.isFixed())
         {
-<<<<<<< HEAD
             return;
-=======
             NumberButton button = (NumberButton) clicked;
             int value = button.getValue();
 
@@ -257,7 +255,7 @@ public class MyWorld extends World
                 selectedCell.setValue(value);
             }
             checkCorrect();
->>>>>>> febfa7e21eb71eb714a799626334df5ce20faf61
+
         }
 
         if(MyWorld.isPencilMode())
