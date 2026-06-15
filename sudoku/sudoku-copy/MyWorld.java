@@ -250,7 +250,13 @@ public class MyWorld extends World
             boolean alreadyCorrect =
                 selectedCell.getValue() == correctValue;
 
-            selectedCell.setValue(value);
+            if(MyWorld.isPencilMode())
+            {
+                selectedCell.togglePencilMark(value);
+                return;
+            }
+
+selectedCell.setValue(value);
 
             long now = System.currentTimeMillis();
             long timeDiff = now - lastMoveTime;
@@ -373,12 +379,27 @@ public class MyWorld extends World
     }
 
     public void checkKeyboardInput(){
+        if(selectedCell == null)
+        {
+            return;
+        }
+        
         String keyPressed = Greenfoot.getKey();
         if(keyPressed!=null){
 
             if(Arrays.asList(correctKey).contains(keyPressed)){
-                if(selectedCell.isFixed()==false){
-                    selectedCell.setValue(Integer.parseInt(keyPressed));
+                int num = Integer.parseInt(keyPressed);
+
+                if(!selectedCell.isFixed())
+                {
+                    if(MyWorld.isPencilMode())
+                    {
+                        selectedCell.togglePencilMark(num);
+                    }
+                    else
+                    {
+                        selectedCell.setValue(num);
+                    }
                 }
 
                 int correctValue =
