@@ -158,7 +158,9 @@ public class MyWorld extends World
     }
 
     // ---------------- BOARD ----------------
-
+    /**
+     * 
+     */
     private void createBoard()
     {
         size = 60;
@@ -242,7 +244,20 @@ public class MyWorld extends World
 
         if(selectedCell.isFixed())
         {
+<<<<<<< HEAD
             return;
+=======
+            NumberButton button = (NumberButton) clicked;
+            int value = button.getValue();
+
+            if(selectedCell.isFixed())
+            {
+                return;
+            }else{
+                selectedCell.setValue(value);
+            }
+            checkCorrect();
+>>>>>>> febfa7e21eb71eb714a799626334df5ce20faf61
         }
 
         if(MyWorld.isPencilMode())
