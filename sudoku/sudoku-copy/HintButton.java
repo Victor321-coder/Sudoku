@@ -23,13 +23,7 @@ public class HintButton extends UI
 
     public void clickButton()
     {
-        World world = getWorld(); 
-        active = !active;
-
-        if (outline != null)
-        {
-            outline.setVisibility(active);
-        }
+        World world = getWorld();
 
         selectedCell = MyWorld.selectedCell;
         if(selectedCell != null){
