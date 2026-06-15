@@ -33,6 +33,7 @@ public class MyWorld extends World
     private int score = 0;
     private long lastMoveTime = System.currentTimeMillis();
     private int life;
+    private LifeCounter lifeCounter;
 
     // Greenfoot Sound
     private static GreenfootSound backgroundMusic = new GreenfootSound ("background music.wav");
@@ -50,6 +51,8 @@ public class MyWorld extends World
 
         int difficulty = DifficultyManager.getDifficulty();
         life=3;
+        lifeCounter=new LifeCounter(life);
+        addObject(lifeCounter, 100, 50);
         puzzle = PuzzleSelecter.getBoard(difficulty, boardNum);
         solution = PuzzleSelecter.getSolution(difficulty, boardNum);
 
@@ -87,7 +90,7 @@ public class MyWorld extends World
             Scanner file = new Scanner(new File("score.txt")); 
             
             if (file.hasNext()) {
-                score = file.nextInt(); 
+                highScore = file.nextInt(); 
             }
             file.close();  
         } catch (FileNotFoundException e) {
@@ -129,6 +132,7 @@ public class MyWorld extends World
             highlight();
         }
         checkKeyboardInput();
+        
         if(checkWin()){
             Greenfoot.setWorld(new WinScreen());
         }
@@ -139,14 +143,14 @@ public class MyWorld extends World
 
         updateTimer();
 
-        showText("Score: " + score, 850, 120);
-        showText("High Score: " + highScore, 850, 40);
+        showText("Score: " + score, 800, 100);
+        showText("High Score: " + highScore, 800, 70);
         
         try {
             FileWriter out = new FileWriter("score.txt");
             PrintWriter output = new PrintWriter(out);
             
-            output.println(score); 
+            output.println(highScore); 
             output.close(); 
         } catch (IOException e) {
             System.out.println("Error saving score");
@@ -240,16 +244,37 @@ public class MyWorld extends World
             {
                 return;
             }
+            checkCorrect();
+        }
+    }
+    public void checkKeyboardInput(){
+        String keyPressed = Greenfoot.getKey();
+        if(keyPressed!=null){
 
-            int row = selectedCell.getRow();
-            int col = selectedCell.getCol();
+            if(Arrays.asList(correctKey).contains(keyPressed)){
+                if(selectedCell.isFixed()==false){
+                    selectedCell.setValue(Integer.parseInt(keyPressed));
+                }
 
-            int correctValue = solution[row][col];
+            }
+            if(keyPressed.equals("backspace")){
+                eraserButton.clickButton();
+            }
+            checkCorrect();
+        }
+    }
+    
+    public void checkCorrect(){
+        if(selectedCell == null) return;
+        int row = selectedCell.getRow();
+        int col = selectedCell.getCol();
+        int correctValue = solution[row][col];
 
-            // Was this cell already correct before the click?
-            boolean alreadyCorrect =
-                selectedCell.getValue() == correctValue;
+        // Was this cell already correct before the click?
+        boolean alreadyCorrect =
+            selectedCell.getValue() == correctValue;
 
+<<<<<<< HEAD
             if(MyWorld.isPencilMode())
             {
                 selectedCell.togglePencilMark(value);
@@ -257,42 +282,46 @@ public class MyWorld extends World
             }
 
 selectedCell.setValue(value);
+=======
+        selectedCell.setValue(selectedCell.getValue());
+>>>>>>> b6b828048dd9f12645776b126da6bc345e516dc5
 
-            long now = System.currentTimeMillis();
-            long timeDiff = now - lastMoveTime;
-            lastMoveTime = now;
+        long now = System.currentTimeMillis();
+        long timeDiff = now - lastMoveTime;
+        lastMoveTime = now;
 
-            if(value == correctValue)
+        if(selectedCell.getValue() == correctValue)
+        {
+            selectedCell.setWrong(false);
+
+            // Only award points the first time
+            if(!alreadyCorrect)
             {
-                selectedCell.setWrong(false);
+                int basePoints = 10;
 
-                // Only award points the first time
-                if(!alreadyCorrect)
-                {
-                    int basePoints = 10;
+            if(timeDiff < 2000)
+            {
+                basePoints += 10;
+            }
+            else if(timeDiff < 5000)
+            {
+                basePoints += 5;
+            }
 
-                if(timeDiff < 2000)
-                {
-                    basePoints += 10;
-                }
-                else if(timeDiff < 5000)
-                {
-                    basePoints += 5;
-                }
+            addScore(basePoints);
 
-                addScore(basePoints);
-
-                checkRowComplete(row);
-                checkColumnComplete(col);
-                checkGridComplete(row, col);
+            checkRowComplete(row);
+            checkColumnComplete(col);
+            checkGridComplete(row, col);
             }
         }
-            else
-            {
-                lessLife();
-                selectedCell.setWrong(true);
-                addScore(-5);
-            }
+        else
+        {
+            lessLife();
+            lifeCounter.setLife(life);
+            
+            selectedCell.setWrong(true);
+            addScore(-5);
         }
     }
 
@@ -378,6 +407,7 @@ selectedCell.setValue(value);
         return true;
     }
 
+<<<<<<< HEAD
     public void checkKeyboardInput(){
         if(selectedCell == null)
         {
@@ -419,6 +449,9 @@ selectedCell.setValue(value);
             }
         }
     }
+=======
+    
+>>>>>>> b6b828048dd9f12645776b126da6bc345e516dc5
 
     public static void selectCell(Cell cell)
     {
@@ -505,7 +538,7 @@ selectedCell.setValue(value);
 
         String time = String.format("%02d:%02d", minutes, seconds);
 
-        showText("Time: " + time, 800, 60);
+        showText("Time: " + time, 800, 40);
     }
 
     public void stopTimer()
