@@ -2,6 +2,11 @@ import greenfoot.*;
 import greenfoot.MouseInfo;
 import java.util.*;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class MyWorld extends World
 {
@@ -72,6 +77,17 @@ public class MyWorld extends World
         startTime = System.currentTimeMillis();
         timerRunning = true;
 
+        try {
+            Scanner file = new Scanner(new File("score.txt")); 
+            
+            if (file.hasNext()) {
+                score = file.nextInt(); 
+            }
+            file.close();  
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        
         if(Greenfoot.mouseClicked(this))
         {
             difficulty++;
@@ -113,7 +129,17 @@ public class MyWorld extends World
         
 
         updateTimer();
-        showText("Score: " + score, 800, 100);
+        showText("Score: " + score, 800, 100); 
+        
+        try {
+            FileWriter out = new FileWriter("score.txt");
+            PrintWriter output = new PrintWriter(out);
+            
+            output.println(score); 
+            output.close(); 
+        } catch (IOException e) {
+            System.out.println("Error saving score");
+        }
     }
 
     // ---------------- BOARD ----------------
