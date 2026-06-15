@@ -159,6 +159,8 @@ public class MyWorld extends World
 
     // ---------------- BOARD ----------------
     /**
+     * This method initialise the 2d array of Cell
+     * It assigned each cell the value according to the puzzle
      * 
      */
     private void createBoard()
@@ -207,7 +209,11 @@ public class MyWorld extends World
     }
 
     // ---------------- INPUT ----------------
-
+    /**
+     * This method checks the cell selection
+     * This method uses a coordinate based system
+     * Since there are other UI element overlay, getting object with mouse option doesn't work
+     */
     public void checkCellSelection()
     {
         if(mouse == null) return;
@@ -230,7 +236,9 @@ public class MyWorld extends World
         selectCell(board[row][col]);
 
     }
-
+    /**
+     * Checks the number pad selection
+     */
     public void checkNumberSelection()
     {
         if(mouse == null || selectedCell == null) return;
@@ -251,6 +259,9 @@ public class MyWorld extends World
             checkCorrect();
         }
     }
+    /**
+     * User input for numbers and deletion
+     */
     public void checkKeyboardInput(){
         String keyPressed = Greenfoot.getKey();
         if(keyPressed!=null){
@@ -267,7 +278,10 @@ public class MyWorld extends World
             checkCorrect();
         }
     }
-    
+    /**
+     * Behavior for when number input is incorrect
+     *
+     */
     public void checkCorrect(){
         if(selectedCell == null) return;
         int row = selectedCell.getRow();
@@ -304,9 +318,9 @@ public class MyWorld extends World
 
             addScore(basePoints);
 
-            checkRowComplete(row);
-            checkColumnComplete(col);
-            checkGridComplete(row, col);
+            // checkRowComplete(row);
+            // checkColumnComplete(col);
+            // checkGridComplete(row, col);
             }
         }
         else
@@ -320,7 +334,12 @@ public class MyWorld extends World
     }
 
     // ---------------- SCORE SYSTEM ----------------
-
+    /**
+     * Add score
+     * 
+     * @parem amount    Amount of score that will be added to the score board
+     *  
+     */
     private void addScore(int amount)
     {
         score += amount;
@@ -367,30 +386,30 @@ public class MyWorld extends World
         addScore(50);
     }
 
-    private void checkGridComplete(int row, int col)
-    {
-        int gridRow = row / 3;
-        int gridCol = col / 3;
+    // private void checkGridComplete(int row, int col)
+    // {
+        // int gridRow = row / 3;
+        // int gridCol = col / 3;
 
-        if(completedGrids[gridRow][gridCol]) return;
+        // if(completedGrids[gridRow][gridCol]) return;
 
-        int startRow = gridRow * 3;
-        int startCol = gridCol * 3;
+        // int startRow = gridRow * 3;
+        // int startCol = gridCol * 3;
 
-        for(int r = startRow; r < startRow + 3; r++)
-        {
-            for(int c = startCol; c < startCol + 3; c++)
-            {
-                if(board[r][c].getValue() == 0)
-                {
-                    return;
-                }
-            }
-        }
+        // for(int r = startRow; r < startRow + 3; r++)
+        // {
+            // for(int c = startCol; c < startCol + 3; c++)
+            // {
+                // if(board[r][c].getValue() == 0)
+                // {
+                    // return;
+                // }
+            // }
+        // }
 
-        completedGrids[gridRow][gridCol] = true;
-        addScore(50);
-    }
+        // completedGrids[gridRow][gridCol] = true;
+        // addScore(50);
+    // }
     private boolean checkWin(){
         for(int i=0;i<9;i++){
             for(int o=0;o<9;o++){
