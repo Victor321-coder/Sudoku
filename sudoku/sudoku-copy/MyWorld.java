@@ -245,17 +245,6 @@ public class MyWorld extends World
         if(selectedCell.isFixed())
         {
             return;
-            NumberButton button = (NumberButton) clicked;
-            int value = button.getValue();
-
-            if(selectedCell.isFixed())
-            {
-                return;
-            }else{
-                selectedCell.setValue(value);
-            }
-            checkCorrect();
-
         }
 
         if(MyWorld.isPencilMode())
