@@ -1,11 +1,15 @@
 import greenfoot.*;
 import greenfoot.MouseInfo;
 import java.util.*;
+import java.util.ArrayList;
+
 public class MyWorld extends World
 {
     public static Cell selectedCell;
     public static Cell[][] board = new Cell[9][9];
     public String[] correctKey = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+
+    private static ArrayList<Cell> selectedCells = new ArrayList<Cell>();
 
     private int[][] puzzle;
     private int[][] solution;
@@ -23,7 +27,7 @@ public class MyWorld extends World
     // SCORE SYSTEM
     private int score = 0;
     private long lastMoveTime = System.currentTimeMillis();
-    
+
     // Greenfoot Sound
     private static GreenfootSound backgroundMusic = new GreenfootSound ("background music.wav");
 
@@ -58,29 +62,28 @@ public class MyWorld extends World
         addObject(new HintButton(), 750, 158);
         addObject(eraserButton, 846, 158);
         addObject(new PencilButton(), 948, 158);
-        
+
         addObject(new DifficultyButton(), 850, 600);
-        
+
         backgroundMusic.setVolume(100); 
         backgroundMusic.playLoop();
 
         setPaintOrder(CellOutline.class, Border.class, Cell.class, NumberButton.class);
-
         startTime = System.currentTimeMillis();
         timerRunning = true;
-        
+
         if(Greenfoot.mouseClicked(this))
         {
             difficulty++;
 
-        if(difficulty > 3)
-        {
-            difficulty = 1;
-        }
+            if(difficulty > 3)
+            {
+                difficulty = 1;
+            }
 
-        DifficultyManager.setDifficulty(difficulty);
+            DifficultyManager.setDifficulty(difficulty);
 
-        Greenfoot.setWorld(new MyWorld());
+            Greenfoot.setWorld(new MyWorld());
         }
     }
 
@@ -88,12 +91,12 @@ public class MyWorld extends World
     public void started () {
         backgroundMusic.playLoop();
     }
-    
+
     //Stops the music when the user presses the pause button
     public void stopped() {
         backgroundMusic.pause();
     }
-    
+
     public void act()
     {
         if(Greenfoot.mouseClicked(null))
@@ -101,6 +104,7 @@ public class MyWorld extends World
             mouse = Greenfoot.getMouseInfo();
             checkCellSelection();
             checkNumberSelection();
+            highlight();
         }
         checkKeyboardInput();
 
@@ -119,12 +123,12 @@ public class MyWorld extends World
             for(int c = 0; c < 9; c++)
             {
                 Cell cell = new Cell(
-                    puzzle[r][c],
-                    puzzle[r][c] != 0,
-                    r,
-                    c,
-                    size
-                );
+                        puzzle[r][c],
+                        puzzle[r][c] != 0,
+                        r,
+                        c,
+                        size
+                    );
 
                 cell.setColor(new Color(168,168,168));
                 board[r][c] = cell;
@@ -168,16 +172,16 @@ public class MyWorld extends World
         int mouseY = mouse.getY();
 
         if(mouseX < boardX || mouseX >= boardX + size * 9 ||
-           mouseY < boardY || mouseY >= boardY + size * 9)
+        mouseY < boardY || mouseY >= boardY + size * 9)
         {
             return;
         }
 
         int col = (mouseX - boardX) / size;
         int row = (mouseY - boardY) / size;
-        
+
         selectCell(board[row][col]);
-        
+
     }
 
     public void checkNumberSelection()
@@ -190,11 +194,10 @@ public class MyWorld extends World
         {
             NumberButton button = (NumberButton) clicked;
             int value = button.getValue();
-            
+
             if(selectedCell.isFixed()==false){
                 selectedCell.setValue(value);
             }
-            
 
             int correctValue =
                 solution[selectedCell.getRow()][selectedCell.getCol()];
@@ -280,14 +283,14 @@ public class MyWorld extends World
     public void checkKeyboardInput(){
         String keyPressed = Greenfoot.getKey();
         if(keyPressed!=null){
-            
+
             if(Arrays.asList(correctKey).contains(keyPressed)){
                 if(selectedCell.isFixed()==false){
                     selectedCell.setValue(Integer.parseInt(keyPressed));
                 }
-            
+
                 int correctValue =
-                solution[selectedCell.getRow()][selectedCell.getCol()];
+                    solution[selectedCell.getRow()][selectedCell.getCol()];
 
                 if(Integer.parseInt(keyPressed) == correctValue)
                 {
@@ -303,10 +306,11 @@ public class MyWorld extends World
             }
         }
     }
-    
 
     public static void selectCell(Cell cell)
     {
+        unselectCells();
+
         if(selectedCell != null)
         {
             selectedCell.setSelected(false);
@@ -318,6 +322,58 @@ public class MyWorld extends World
         {
             selectedCell.setSelected(true);
         }
+    }
+
+    // ---------------- HIGHLIGHT ----------------
+
+    private void highlight(){
+        int row = selectedCell.getRow();
+        int col = selectedCell.getCol();
+        int gridX = col/3;
+        int gridY = row/3;
+        
+        //Gets corners of the grid that selected cell is in
+        int startX = gridX * 3;
+        int bottomX = gridX * 3 + 2;
+        int startY = gridY * 3;
+        int bottomY = gridY * 3 + 2;
+
+        //Highlights grid
+        for(int r = startX; r < bottomX + 1; r++){
+            for(int c = startY; c < bottomY + 1; c++){
+                board[c][r].setHighlighted(true);
+                selectedCells.add(board[c][r]);
+            } 
+        }
+
+        //Highlights column
+        for(int r = 0; r < 9; r++){
+            board[r][col].setHighlighted(true);
+            selectedCells.add(board[r][col]);
+        }
+        
+        //Highlights row
+        for(int r = 0; r < 9; r++){
+            board[row][r].setHighlighted(true);
+            selectedCells.add(board[row][r]);
+        }
+        
+        //Allows the selected cell to be brighter than other highlighted cells
+        selectedCell.setHighlighted(false);
+    }
+
+    private static void unselectCells(){
+        //For every cell in arrayList, unhighlight them and remove from list
+        if(selectedCells.size() > 0){
+            for(Cell highlightedCell : selectedCells){
+                highlightedCell.setHighlighted(false);
+            }
+
+            for(int i = selectedCells.size() - 1; i >= 0; i--){
+                selectedCells.remove(i);
+            }    
+        }
+
     }
 
     // ---------------- TIMER ----------------
@@ -377,7 +433,7 @@ public class MyWorld extends World
     {
         return selectedCell;
     }
-    
+
     public int getHintCell() {
         return solution[selectedCell.getRow()][selectedCell.getCol()];
     }
