@@ -32,6 +32,7 @@ public class MyWorld extends World
     // SCORE SYSTEM
     private int score = 0;
     private long lastMoveTime = System.currentTimeMillis();
+    private int life;
 
     // Greenfoot Sound
     private static GreenfootSound backgroundMusic = new GreenfootSound ("background music.wav");
@@ -48,7 +49,7 @@ public class MyWorld extends World
         int boardNum = Greenfoot.getRandomNumber(10);
 
         int difficulty = DifficultyManager.getDifficulty();
-
+        life=3;
         puzzle = PuzzleSelecter.getBoard(difficulty, boardNum);
         solution = PuzzleSelecter.getSolution(difficulty, boardNum);
 
@@ -130,6 +131,9 @@ public class MyWorld extends World
         checkKeyboardInput();
         if(checkWin()){
             Greenfoot.setWorld(new WinScreen());
+        }
+        if(life<=0){
+            Greenfoot.setWorld(new LoseScreen());
         }
         
 
@@ -279,6 +283,7 @@ public class MyWorld extends World
         }
             else
             {
+                lessLife();
                 selectedCell.setWrong(true);
                 addScore(-5);
             }
@@ -491,6 +496,12 @@ public class MyWorld extends World
     {
         startTime = System.currentTimeMillis();
         timerRunning = true;
+    }
+    public void lessLife(){
+        life--;
+    }
+    public int getLife(){
+        return life;
     }
 
     // ---------------- RESTART ----------------
