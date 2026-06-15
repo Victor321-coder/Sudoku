@@ -6,6 +6,7 @@ public class Cell extends Actor
     private boolean fixed;
     private boolean selected = false;
     private boolean wrong = false;
+    private boolean highlighted = false;
 
     private int row;
     private int col;
@@ -115,6 +116,10 @@ public class Cell extends Actor
         backgroundColor=color;
         draw();
     }
+    public void setHighlighted(boolean bool){
+        highlighted = bool;
+        draw();
+    }
     public void checkSelected(){
         if(selected){
             setColor(new Color(200, 220, 255));
@@ -136,7 +141,11 @@ public class Cell extends Actor
         {
             img.setColor(Color.WHITE);
         }
-
+        
+        if(highlighted){
+            img.setColor(new Color(226, 235, 243));
+        }
+        
         img.fillRect(0, 0, size, size);
 
         // Cell border
