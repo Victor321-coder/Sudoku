@@ -230,74 +230,89 @@ public class MyWorld extends World
     }
 
     public void checkNumberSelection()
+{
+    if(mouse == null || selectedCell == null) return;
+
+    Actor clicked = mouse.getActor();
+
+    if(clicked instanceof NumberButton)
     {
-        if(mouse == null || selectedCell == null) return;
+        NumberButton button = (NumberButton) clicked;
+        int value = button.getValue();
 
-        Actor clicked = mouse.getActor();
-
-        if(clicked instanceof NumberButton)
+        if(selectedCell.isFixed())
         {
-            NumberButton button = (NumberButton) clicked;
-            int value = button.getValue();
-
-            if(selectedCell.isFixed())
-            {
-                return;
-            }
-            checkCorrect();
+            return;
         }
-    }
-    public void checkKeyboardInput(){
-        String keyPressed = Greenfoot.getKey();
-        if(keyPressed!=null){
 
-            if(Arrays.asList(correctKey).contains(keyPressed)){
-                if(selectedCell.isFixed()==false){
-                    selectedCell.setValue(Integer.parseInt(keyPressed));
+        if(MyWorld.isPencilMode())
+        {
+            selectedCell.togglePencilMark(value);
+            return;
+        }
+
+        selectedCell.setValue(value);
+        checkCorrect();
+    }
+}
+    public void checkKeyboardInput()
+{
+    if(selectedCell == null)
+    {
+        return;
+    }
+
+    String keyPressed = Greenfoot.getKey();
+
+    if(keyPressed != null)
+    {
+        if(Arrays.asList(correctKey).contains(keyPressed))
+        {
+            int num = Integer.parseInt(keyPressed);
+
+            if(!selectedCell.isFixed())
+            {
+                if(MyWorld.isPencilMode())
+                {
+                    selectedCell.togglePencilMark(num);
                 }
+                else
+                {
+                    selectedCell.setValue(num);
+                    checkCorrect();
+                }
+            }
+        }
 
-            }
-            if(keyPressed.equals("backspace")){
-                eraserButton.clickButton();
-            }
-            checkCorrect();
+        if(keyPressed.equals("backspace"))
+        {
+            eraserButton.clickButton();
         }
     }
+}
     
-    public void checkCorrect(){
-        if(selectedCell == null) return;
-        int row = selectedCell.getRow();
-        int col = selectedCell.getCol();
-        int correctValue = solution[row][col];
+    public void checkCorrect()
+{
+    if(selectedCell == null) return;
 
-        // Was this cell already correct before the click?
-        boolean alreadyCorrect =
-            selectedCell.getValue() == correctValue;
+    int row = selectedCell.getRow();
+    int col = selectedCell.getCol();
+    int correctValue = solution[row][col];
 
-<<<<<<< HEAD
-            if(MyWorld.isPencilMode())
-            {
-                selectedCell.togglePencilMark(value);
-                return;
-            }
+    boolean alreadyCorrect =
+        selectedCell.getValue() == correctValue;
 
-selectedCell.setValue(value);
-=======
-        selectedCell.setValue(selectedCell.getValue());
->>>>>>> b6b828048dd9f12645776b126da6bc345e516dc5
+    long now = System.currentTimeMillis();
+    long timeDiff = now - lastMoveTime;
+    lastMoveTime = now;
 
-        long now = System.currentTimeMillis();
-        long timeDiff = now - lastMoveTime;
-        lastMoveTime = now;
+    if(selectedCell.getValue() == correctValue)
+    {
+        selectedCell.setWrong(false);
 
-        if(selectedCell.getValue() == correctValue)
+        if(!alreadyCorrect)
         {
-            selectedCell.setWrong(false);
-
-            // Only award points the first time
-            if(!alreadyCorrect)
-            {
-                int basePoints = 10;
+            int basePoints = 10;
 
             if(timeDiff < 2000)
             {
@@ -313,17 +328,17 @@ selectedCell.setValue(value);
             checkRowComplete(row);
             checkColumnComplete(col);
             checkGridComplete(row, col);
-            }
-        }
-        else
-        {
-            lessLife();
-            lifeCounter.setLife(life);
-            
-            selectedCell.setWrong(true);
-            addScore(-5);
         }
     }
+    else
+    {
+        lessLife();
+        lifeCounter.setLife(life);
+
+        selectedCell.setWrong(true);
+        addScore(-5);
+    }
+}
 
     // ---------------- SCORE SYSTEM ----------------
 
@@ -407,51 +422,7 @@ selectedCell.setValue(value);
         return true;
     }
 
-<<<<<<< HEAD
-    public void checkKeyboardInput(){
-        if(selectedCell == null)
-        {
-            return;
-        }
-        
-        String keyPressed = Greenfoot.getKey();
-        if(keyPressed!=null){
-
-            if(Arrays.asList(correctKey).contains(keyPressed)){
-                int num = Integer.parseInt(keyPressed);
-
-                if(!selectedCell.isFixed())
-                {
-                    if(MyWorld.isPencilMode())
-                    {
-                        selectedCell.togglePencilMark(num);
-                    }
-                    else
-                    {
-                        selectedCell.setValue(num);
-                    }
-                }
-
-                int correctValue =
-                    solution[selectedCell.getRow()][selectedCell.getCol()];
-
-                if(Integer.parseInt(keyPressed) == correctValue)
-                {
-                    selectedCell.setWrong(false);
-                }
-                else
-                {
-                    selectedCell.setWrong(true);
-                }
-            }
-            if(keyPressed.equals("backspace")){
-                eraserButton.clickButton();
-            }
-        }
-    }
-=======
     
->>>>>>> b6b828048dd9f12645776b126da6bc345e516dc5
 
     public static void selectCell(Cell cell)
     {
