@@ -86,7 +86,7 @@ public class MyWorld extends World
             Scanner file = new Scanner(new File("score.txt")); 
             
             if (file.hasNext()) {
-                score = file.nextInt(); 
+                highScore = file.nextInt(); 
             }
             file.close();  
         } catch (FileNotFoundException e) {
@@ -135,14 +135,14 @@ public class MyWorld extends World
 
         updateTimer();
 
-        showText("Score: " + score, 850, 120);
-        showText("High Score: " + highScore, 850, 40);
+        showText("Score: " + score, 800, 100);
+        showText("High Score: " + highScore, 800, 70);
         
         try {
             FileWriter out = new FileWriter("score.txt");
             PrintWriter output = new PrintWriter(out);
             
-            output.println(score); 
+            output.println(highScore); 
             output.close(); 
         } catch (IOException e) {
             System.out.println("Error saving score");
@@ -479,7 +479,7 @@ public class MyWorld extends World
 
         String time = String.format("%02d:%02d", minutes, seconds);
 
-        showText("Time: " + time, 800, 60);
+        showText("Time: " + time, 800, 40);
     }
 
     public void stopTimer()
