@@ -107,6 +107,10 @@ public class MyWorld extends World
             highlight();
         }
         checkKeyboardInput();
+        if(checkWin()){
+            Greenfoot.setWorld(new WinScreen());
+        }
+        
 
         updateTimer();
         showText("Score: " + score, 850, 120);
@@ -278,6 +282,15 @@ public class MyWorld extends World
         }
 
         addScore(50);
+    }
+    private boolean checkWin(){
+        for(int i=0;i<9;i++){
+            for(int o=0;o<9;o++){
+                if(board[i][o].getValue() == 0)
+                    return false;
+            }
+        }
+        return true;
     }
 
     public void checkKeyboardInput(){
