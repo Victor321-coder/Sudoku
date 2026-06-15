@@ -134,11 +134,9 @@ public class MyWorld extends World
         
 
         updateTimer();
-<<<<<<< HEAD
         showText("Score: " + score, 850, 120);
         showText("High Score: " + highScore, 850, 40);
-=======
-        showText("Score: " + score, 800, 100); 
+ 
         
         try {
             FileWriter out = new FileWriter("score.txt");
@@ -149,7 +147,6 @@ public class MyWorld extends World
         } catch (IOException e) {
             System.out.println("Error saving score");
         }
->>>>>>> 0bb0a1b527473b36de77e203902dc7a32f152cac
     }
 
     // ---------------- BOARD ----------------

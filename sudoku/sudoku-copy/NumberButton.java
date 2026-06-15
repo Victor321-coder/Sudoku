@@ -1,9 +1,10 @@
 import greenfoot.*;
 
-public class NumberButton extends Actor
+public class NumberButton extends Buttons
 {
     private int number;
 
+    //Based on number, it sets up a number button
     public NumberButton(int n)
     {
         number = n;
@@ -24,6 +25,7 @@ public class NumberButton extends Actor
     public void act()
     {
         // userNumberSelect();
+        //Plays sound effect
         if(Greenfoot.mouseClicked(this)){
 
             Greenfoot.playSound("clicksoundeffect.wav");
@@ -31,7 +33,7 @@ public class NumberButton extends Actor
         }
     }
 
-    
+    //Returns value of number button
     public int getValue(){
         return number;
     }

@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class DifficultyButton extends Actor    
+public class DifficultyButton extends Buttons    
 {
     private int difficulty;
 
@@ -14,15 +14,18 @@ public class DifficultyButton extends Actor
     {
         if(Greenfoot.mouseClicked(this))
         {
+            //Plays sound and increases difficulty
             Greenfoot.playSound("clicksoundeffect.wav");
             
             difficulty++;
-
+            
+            //Resets difficulty back to 1
             if(difficulty > 3)
             {
                 difficulty = 1;
             }
 
+            //Sets difficulty to chosen difficulty
             DifficultyManager.setDifficulty(difficulty);
 
             updateImage();
@@ -35,6 +38,7 @@ public class DifficultyButton extends Actor
     {
         String text;
 
+        //Based on difficulty, text changes
         if(difficulty == 1)
         {
             text = "Easy";

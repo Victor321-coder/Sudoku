@@ -1,17 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class InfoButton2 here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class InfoButton2 extends Buttons
 {
-    /**
-     * Act - do whatever the InfoButton2 wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public InfoButton2(int sizeX, int sizeY)
     {
 
@@ -27,6 +17,7 @@ public class InfoButton2 extends Buttons
     }
     public void act()
     {
+        //Plays sound effect and makes infoPage2
         if (Greenfoot.mouseClicked(this))
         {
             Greenfoot.playSound("clicksoundeffect.wav");    

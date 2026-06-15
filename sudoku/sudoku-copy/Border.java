@@ -15,7 +15,8 @@ public class Border extends BoardVisual
 
         GreenfootImage img = new GreenfootImage(imageSize, imageSize);
         img.setColor(Color.BLACK);
-
+        
+        //Draws a border around the grid
         for(int i = 0; i <= 9; i += 3)
         {
             int position = i * size;

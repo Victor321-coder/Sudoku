@@ -12,10 +12,8 @@ public class Restart extends Actor
         GreenfootImage img = new GreenfootImage("restart button.png"); 
         setImage(img); 
     }
-    /**
-     * Act - do whatever the Restart wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    
+    //If clicked then the world restarts
     public void act()
     {
         if (Greenfoot.mouseClicked(this)) {

@@ -860,6 +860,7 @@ public class PuzzleSelecter extends Actor
         return copyBoard(EASY_SOLUTION[0]);
     }
     
+    //Copies board
     private static int[][] copyBoard(int[][] original){
         int[][] copy=new int[original.length][original[0].length];
         for (int row = 0; row < original.length; row++) {

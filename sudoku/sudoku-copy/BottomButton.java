@@ -1,7 +1,8 @@
 import greenfoot.*;
 
-public class BottomButton extends Actor
+public class BottomButton extends Buttons
 {
+    //Makes button
     public BottomButton(String text)
     {
         GreenfootImage img = new GreenfootImage(150, 60);

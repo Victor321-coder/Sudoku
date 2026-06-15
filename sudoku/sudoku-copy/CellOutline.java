@@ -1,17 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class CellOutline here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class CellOutline extends BoardVisual
 {
-    /**
-     * Act - do whatever the CellOutline wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public CellOutline(int size)
     {
         int thickness = 1;
@@ -19,7 +9,8 @@ public class CellOutline extends BoardVisual
 
         GreenfootImage img = new GreenfootImage(imageSize, imageSize);
         img.setColor(Color.GRAY);
-
+        
+        //Draws an outline around each cell
         for(int i = 0; i <= 9; i += 1)
         {
             int position = i * size;

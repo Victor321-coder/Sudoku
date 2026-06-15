@@ -14,6 +14,7 @@ public class HintButton extends UI
 
     public void act()
     {
+        //Plays sound effect when clicked
         if (Greenfoot.mouseClicked(this) || (outline != null && Greenfoot.mouseClicked(outline)))
         {
             Greenfoot.playSound("clicksoundeffect.wav");
@@ -21,6 +22,7 @@ public class HintButton extends UI
         }
     }
 
+    //When clicked, the value of selected cell becomes the answer
     public void clickButton()
     {
         World world = getWorld();

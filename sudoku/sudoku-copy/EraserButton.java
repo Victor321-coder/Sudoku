@@ -10,6 +10,7 @@ public class EraserButton extends UI
         setImage(uiImg);
     }
     
+    //Plays sound effect when clicked
     public void act(){
         if(Greenfoot.mouseClicked(this)){
             Greenfoot.playSound("clicksoundeffect.wav");
@@ -17,6 +18,7 @@ public class EraserButton extends UI
         }
     }
     
+    //Sets the value of selected cell to zero
     public void clickButton(){
         selectedCell = MyWorld.selectedCell;
         

@@ -4,6 +4,7 @@ public class PlayButton extends Buttons
 {
     private String text;
 
+    //Draws image
     public PlayButton(String text, int sizeX, int sizeY)
     {
         this.text = text;
@@ -24,6 +25,7 @@ public class PlayButton extends Buttons
 
     public void act()
     {
+        //Plays sound effect and makes the main playing world
         if (Greenfoot.mouseClicked(this))
         {
             Greenfoot.playSound("clicksoundeffect.wav");

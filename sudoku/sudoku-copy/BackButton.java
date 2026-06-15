@@ -18,6 +18,7 @@ public class BackButton extends Actor
 
     public void act()
     {
+        //When button is clicked, play sound effect and make start screen world
         if (Greenfoot.mouseClicked(this))
         {
             Greenfoot.playSound("clicksoundeffect.wav");

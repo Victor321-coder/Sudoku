@@ -8,6 +8,7 @@ public class ButtonOutline extends UI
         setImage(uiImg);
     }
     
+    //Changes visibility of outline based on boolean
     public void setVisibility(boolean active){
         if(!active){
             getImage().setTransparency(0);

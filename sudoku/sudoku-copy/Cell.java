@@ -28,18 +28,19 @@ public class Cell extends Actor
 
         
     }
+    
+    //Draws cell when added
     public void addedToWorld(World w){
         draw();
     }
-    public void act()
-    {
-    }
     
+    //Sets wrong bool and redraws cell
     public void setWrong(boolean wrong) {
         this.wrong = wrong;
         draw();
     }
-
+    
+    //Sets selected bool and redraws cell
     public void setSelected(boolean selected)
     {
         this.selected = selected;
@@ -47,6 +48,7 @@ public class Cell extends Actor
         draw();
     }
 
+    //If cell is not fixed then set value and redraw cell
     public void setValue(int v)
     {
         if(!fixed)
@@ -60,6 +62,7 @@ public class Cell extends Actor
         }
     }
 
+    //Toggles pencil mark for the cell
     public void togglePencilMark(int num)
     {
         if(fixed)
@@ -77,6 +80,7 @@ public class Cell extends Actor
         draw();
     }
 
+    //Clears all pencil marks for the cell
     public void clearPencilMarks()
     {
         for(int i = 1; i <= 9; i++)
@@ -85,6 +89,7 @@ public class Cell extends Actor
         }
     }
 
+    //Clears the pencil marks and removes pencil marks
     public void clearCell()
     {
         if(!fixed)
@@ -95,31 +100,42 @@ public class Cell extends Actor
         }
     }
 
+    //Returns value of cell
     public int getValue()
     {
         return value;
     }
 
+    //Returns row of cell
     public int getRow()
     {
         return row;
     }
 
+    //Returns column of cell
     public int getCol()
     {
         return col;
     }
+    
+    //Return fixed bool
     public boolean isFixed(){
         return fixed;
     }
+    
+    //Sets cell to specific color
     public void setColor(Color color){
         backgroundColor=color;
         draw();
     }
+    
+    //Sets highlighted bool
     public void setHighlighted(boolean bool){
         highlighted = bool;
         draw();
     }
+    
+    //Checks selected and sets color of cell
     public void checkSelected(){
         if(selected){
             setColor(new Color(200, 220, 255));
@@ -128,6 +144,7 @@ public class Cell extends Actor
         }
     }
 
+    //Draws cell
     private void draw()
     {
         img.clear();
@@ -142,6 +159,7 @@ public class Cell extends Actor
             img.setColor(Color.WHITE);
         }
         
+        //If higlighted bool then set to specific color
         if(highlighted){
             img.setColor(new Color(226, 235, 243));
         }

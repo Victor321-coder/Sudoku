@@ -21,6 +21,7 @@ public class SideIcon extends Actor
         setImage(img);
     }
 
+    //If clicked then a new Rule world is created
     public void act()
     {
         if (Greenfoot.mouseClicked(this))
