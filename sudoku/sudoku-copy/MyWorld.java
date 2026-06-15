@@ -331,7 +331,8 @@ public class MyWorld extends World
         int col = selectedCell.getCol();
         int gridX = col/3;
         int gridY = row/3;
-
+        
+        //Gets corners of the grid that selected cell is in
         int startX = gridX * 3;
         int bottomX = gridX * 3 + 2;
         int startY = gridY * 3;
@@ -356,11 +357,13 @@ public class MyWorld extends World
             board[row][r].setHighlighted(true);
             selectedCells.add(board[row][r]);
         }
-
+        
+        //Allows the selected cell to be brighter than other highlighted cells
         selectedCell.setHighlighted(false);
     }
 
     private static void unselectCells(){
+        //For every cell in arrayList, unhighlight them and remove from list
         if(selectedCells.size() > 0){
             for(Cell highlightedCell : selectedCells){
                 highlightedCell.setHighlighted(false);
