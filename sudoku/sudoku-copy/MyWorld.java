@@ -30,6 +30,11 @@ public class MyWorld extends World
 
     // Greenfoot Sound
     private static GreenfootSound backgroundMusic = new GreenfootSound ("background music.wav");
+    private static int highScore = 0;
+    
+    private boolean[] completedRows = new boolean[9];
+    private boolean[] completedCols = new boolean[9];
+    private boolean[][] completedGrids = new boolean[3][3];
 
     public MyWorld()
     {
@@ -114,6 +119,7 @@ public class MyWorld extends World
 
         updateTimer();
         showText("Score: " + score, 850, 120);
+        showText("High Score: " + highScore, 850, 40);
     }
 
     // ---------------- BOARD ----------------
@@ -199,14 +205,22 @@ public class MyWorld extends World
             NumberButton button = (NumberButton) clicked;
             int value = button.getValue();
 
-            if(selectedCell.isFixed()==false){
-                selectedCell.setValue(value);
+            if(selectedCell.isFixed())
+            {
+                return;
             }
 
-            int correctValue =
-                solution[selectedCell.getRow()][selectedCell.getCol()];
+            int row = selectedCell.getRow();
+            int col = selectedCell.getCol();
 
-            // SPEED SYSTEM
+            int correctValue = solution[row][col];
+
+            // Was this cell already correct before the click?
+            boolean alreadyCorrect =
+                selectedCell.getValue() == correctValue;
+
+            selectedCell.setValue(value);
+
             long now = System.currentTimeMillis();
             long timeDiff = now - lastMoveTime;
             lastMoveTime = now;
@@ -215,20 +229,27 @@ public class MyWorld extends World
             {
                 selectedCell.setWrong(false);
 
-                int basePoints = 10;
+                // Only award points the first time
+                if(!alreadyCorrect)
+                {
+                    int basePoints = 10;
 
-                if(timeDiff < 2000) basePoints += 10;
-                else if(timeDiff < 5000) basePoints += 5;
+                if(timeDiff < 2000)
+                {
+                    basePoints += 10;
+                }
+                else if(timeDiff < 5000)
+                {
+                    basePoints += 5;
+                }
 
                 addScore(basePoints);
-
-                int row = selectedCell.getRow();
-                int col = selectedCell.getCol();
 
                 checkRowComplete(row);
                 checkColumnComplete(col);
                 checkGridComplete(row, col);
             }
+        }
             else
             {
                 selectedCell.setWrong(true);
@@ -242,45 +263,71 @@ public class MyWorld extends World
     private void addScore(int amount)
     {
         score += amount;
-        if(score < 0) score = 0;
+        if(score < 0) 
+        {
+            score = 0;
+        }
+        
+        if(score > highScore)
+        {
+            highScore = score;
+        }
     }
 
     private void checkRowComplete(int row)
     {
+        if(completedRows[row]) return;
+
         for(int c = 0; c < 9; c++)
         {
             if(board[row][c].getValue() == 0)
+            {
                 return;
+            }
         }
 
+        completedRows[row] = true;
         addScore(50);
     }
 
     private void checkColumnComplete(int col)
     {
+        if(completedCols[col]) return;
+
         for(int r = 0; r < 9; r++)
         {
             if(board[r][col].getValue() == 0)
+            {
                 return;
+            }
         }
 
+        completedCols[col] = true;
         addScore(50);
     }
 
     private void checkGridComplete(int row, int col)
     {
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
+        int gridRow = row / 3;
+        int gridCol = col / 3;
+
+        if(completedGrids[gridRow][gridCol]) return;
+
+        int startRow = gridRow * 3;
+        int startCol = gridCol * 3;
 
         for(int r = startRow; r < startRow + 3; r++)
         {
             for(int c = startCol; c < startCol + 3; c++)
             {
                 if(board[r][c].getValue() == 0)
+                {
                     return;
+                }
             }
         }
 
+        completedGrids[gridRow][gridCol] = true;
         addScore(50);
     }
     private boolean checkWin(){
@@ -314,7 +361,7 @@ public class MyWorld extends World
                     selectedCell.setWrong(true);
                 }
             }
-            if(keyPressed=="backspace"){
+            if(keyPressed.equals("backspace")){
                 eraserButton.clickButton();
             }
         }
@@ -343,6 +390,8 @@ public class MyWorld extends World
         if(selectedCell != null){
             int row = selectedCell.getRow();
             int col = selectedCell.getCol();
+            int correctValue = solution[row][col];
+            boolean alreadyCorrect = selectedCell.getValue() == correctValue;
             int gridX = col/3;
             int gridY = row/3;
 
